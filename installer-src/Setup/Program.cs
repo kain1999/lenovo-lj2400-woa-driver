@@ -1,37 +1,39 @@
 // ============================================================================
-// LJ2400Setup.exe —— 联想 LJ24/LJ26/M74/M76 系列打印机驱动安装器 v2
+// LJ2400Setup.exe —— 联想 LJ24/LJ26/M74/M76 系列打印机驱动安装器
 // Windows on ARM / x64 通用（AnyCPU，纯 .NET Framework WinForms，零第三方依赖）
 //
-// UI 主次（WoA 驱动主线）：
-//   路线1  v4 签名路线 —— 唯一主推入口（ARM64 上为默认且唯一显眼路线）：
+// 两条安装路线（ARM64/x64 界面一致）：
+//   签名安装路线（推荐主推）：
 //          inf2cat /os:10_X64,10_ARM64 → New-SelfSignedCertificate(CN=Lenovo WoA Test)
 //          → Set-AuthenticodeSignature 签 .cat → 证书入 LocalMachine/CurrentUser\TrustedPublisher
 //          → bcdedit /set testsigning on → 提示重启（state.json=pending_reboot）
 //          → 重启后再次运行本安装器自动续装（pnputil 进 store → 27 型号验证 → 建队列）
-//   路线3  IPP 兜底 —— 签名路线不可用时的第二入口（WoA 上立即可用的基础打印）：
+//          SDK 引导：HttpClient 下载微软官方安装器直链（x86 二进制，WoA 模拟层可运行）
+//          → winsdksetup.exe /features OptionId.SigningTools /q /norestart 静默最小安装
+//          → 重新探测 inf2cat；静默退出码非 0 或探测仍失败 → 自动转 GUI 安装器 → 「重新检测 Inf2Cat」
+//   IPP 路线（基础打印，无需 SDK，零依赖）：
 //          Add-Printer -IppUrl http://<ip>/ipp/print（网络型号 DN/DW/DNA/DXF/W 后缀）
-//   路线2  v3 兼容路线 —— 高级选项折叠区内的可选附加，仅限 x64 机器（WoA 不适用）：
-//          v3pkg\（LJ2400V3.INF + 27 ASCII GPD），printui /if 弹信任框
-//          （实测无人点被 0x4C7 取消 → 提示重试）
-//   高级选项另含：v1 直装链（pnputil→printui 降级）原样保留
 //
 // 状态机：%ProgramData%\LenovoLJ2400WoA\state.json
 //   pending_signature → pending_reboot →（重启）→ ready → installed
 //
 // 编译（唯一编译链）：
 //   C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe
-//     /target:winexe /platform:anycpu /out:dist\LJ2400Setup.exe
-//     /win32manifest:app.manifest Setup\Program.cs
+//     /target:winexe /platform:anycpu /r:System.Net.Http.dll
+//     /out:dist\LJ2400Setup.exe /win32manifest:app.manifest Setup\Program.cs
 //
 // 自检入口（winexe 无控制台，结果写 exe 同目录文件 + 退出码）：
 //   LJ2400Setup.exe /selftest-state   → selftest_state.txt（状态机读写往返测试）
 //   LJ2400Setup.exe /selftest-arch    → selftest_arch.txt（ARM64 检测函数单测）
+//   LJ2400Setup.exe /selftest-sdk     → selftest_sdk.txt（SDK 引导单测：直链/静默命令/探测顺序，不实际下载）
 // ============================================================================
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -80,12 +82,10 @@ namespace LenovoLJ2400Setup
             "Lenovo M7690DNA"
         };
 
-        // 驱动包文件名（v4 由生成器产出；v3 兼容包由另一任务产出到 v3pkg\）
+        // 驱动包文件名（v4 打印模型，由生成器产出）
         public const string InfFileName = "LJ2400WOA.INF";
-        public const string V3DirName = "v3pkg";
-        public const string V3InfFileName = "LJ2400V3.INF";
 
-        // 路线1 自签证书主题（测试签名专用，无秘钥写入代码）
+        // 签名安装路线自签证书主题（测试签名专用，无秘钥写入代码）
         public const string CertSubject = "CN=Lenovo WoA Test";
 
         [STAThread]
@@ -101,6 +101,10 @@ namespace LenovoLJ2400Setup
                 if (string.Equals(a, "/selftest-arch", StringComparison.OrdinalIgnoreCase))
                 {
                     Environment.Exit(SelfTest.RunArch(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selftest_arch.txt")));
+                }
+                if (string.Equals(a, "/selftest-sdk", StringComparison.OrdinalIgnoreCase))
+                {
+                    Environment.Exit(SelfTest.RunSdk(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selftest_sdk.txt")));
                 }
             }
             Application.EnableVisualStyles();
@@ -268,84 +272,115 @@ namespace LenovoLJ2400Setup
     }
 
     // ==========================================================================
-    // inf2cat.exe 探测：环境变量 WindowsSdkDir + 常见 Windows Kits 安装路径
+    // inf2cat.exe 探测：WindowsSdkDir 环境变量 + Windows Kits 双根；
+    // 版本目录降序；子目录探测顺序 ARM64\ → x86\ → x64\ → 版本根
+    // （ARM64 机上 x86 版经模拟层也可运行，探测到任一即可用）
     // ==========================================================================
     internal static class Inf2CatLocator
     {
-        // 取版本号最高的命中（版本目录字符串降序，10.0.26100 排在 10.0.22621 前）
-        public static string Find()
+        public const string SubOrderText = "ARM64\\ → x86\\ → x64\\ → 版本根目录";
+        private static readonly string[] SubDirs = new string[] { "ARM64", "x86", "x64", "" };
+
+        public static List<string> SearchRoots()
         {
-            List<string> versionDirs = new List<string>();
+            List<string> roots = new List<string>();
             try
             {
                 string sdk = Environment.GetEnvironmentVariable("WindowsSdkDir");
-                if (!string.IsNullOrEmpty(sdk))
+                if (!string.IsNullOrEmpty(sdk)) roots.Add(Path.Combine(sdk.TrimEnd('\\'), "bin"));
+            }
+            catch { }
+            roots.Add(@"C:\Program Files (x86)\Windows Kits\10\bin");
+            roots.Add(@"C:\Program Files\Windows Kits\10\bin");
+            return roots;
+        }
+
+        public static List<string> VersionDirsOf(string binRoot)
+        {
+            List<string> dirs = new List<string>();
+            try
+            {
+                if (Directory.Exists(binRoot))
                 {
-                    string bin = Path.Combine(sdk.TrimEnd('\\'), "bin");
-                    if (Directory.Exists(bin)) AddVersionDirs(versionDirs, bin);
-                }
-                foreach (string kitsRoot in new string[]
-                {
-                    @"C:\Program Files (x86)\Windows Kits\10\bin",
-                    @"C:\Program Files\Windows Kits\10\bin"
-                })
-                {
-                    if (Directory.Exists(kitsRoot)) AddVersionDirs(versionDirs, kitsRoot);
+                    string[] found = Directory.GetDirectories(binRoot);
+                    Array.Sort(found, delegate(string a, string b)
+                    {
+                        return string.Compare(b, a, StringComparison.OrdinalIgnoreCase);
+                    });
+                    dirs.AddRange(found);
                 }
             }
             catch { }
-            foreach (string dir in versionDirs)
+            return dirs;
+        }
+
+        // 探测路径清单（自检 /selftest-sdk 输出用）
+        public static string DescribeSearch()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string root in SearchRoots())
             {
-                foreach (string sub in new string[] { "x86", "x64", "" })
+                sb.Append("  根：" + root + (Directory.Exists(root) ? "  [存在]" : "  [不存在]"));
+                List<string> vdirs = VersionDirsOf(root);
+                if (vdirs.Count > 0) sb.Append("；版本目录(降序)：" + string.Join(", ", vdirs.ToArray()));
+                sb.Append("\r\n");
+            }
+            sb.Append("  子目录探测顺序：" + SubOrderText + "\r\n");
+            return sb.ToString();
+        }
+
+        // 取版本号最高的命中（版本目录字符串降序，10.0.26100 排在 10.0.22621 前）
+        public static string Find()
+        {
+            foreach (string binRoot in SearchRoots())
+            {
+                foreach (string vdir in VersionDirsOf(binRoot))
                 {
-                    string p = sub.Length == 0 ? Path.Combine(dir, "inf2cat.exe") : Path.Combine(dir, sub, "inf2cat.exe");
-                    if (File.Exists(p)) return p;
+                    foreach (string sub in SubDirs)
+                    {
+                        string p = sub.Length == 0 ? Path.Combine(vdir, "inf2cat.exe") : Path.Combine(vdir, sub, "inf2cat.exe");
+                        if (File.Exists(p)) return p;
+                    }
                 }
             }
             return null;
         }
-
-        private static void AddVersionDirs(List<string> list, string binRoot)
-        {
-            try
-            {
-                string[] dirs = Directory.GetDirectories(binRoot);
-                Array.Sort(dirs, delegate(string a, string b)
-                {
-                    return string.Compare(b, a, StringComparison.OrdinalIgnoreCase);
-                });
-                list.AddRange(dirs);
-            }
-            catch { }
-        }
     }
 
     // ==========================================================================
-    // winget 探测（路线1 缺 inf2cat 时一键安装 Windows SDK 用）
+    // Windows SDK 引导：官方安装器直链下载 → SigningTools 静默最小安装 → 探测；
+    // 静默退出码非 0 或探测仍失败 → 自动转 GUI 安装器 → 用户装完点「重新检测 Inf2Cat」
     // ==========================================================================
-    internal static class WingetLocator
+    internal static class SdkInstaller
     {
-        public static bool Exists()
+        // 微软官方 Windows SDK 安装器直链（Learn 官方页数据；x86 二进制，WoA 模拟层可运行）
+        public const string DownloadUrl = "https://go.microsoft.com/fwlink/?linkid=2382519";
+
+        // 官方下载页（次入口）
+        public const string OfficialPageUrl = "https://learn.microsoft.com/en-us/windows/apps/windows-sdk/downloads";
+
+        // 本地安装器落盘位置
+        public static string InstallerPath()
         {
-            try
-            {
-                string p = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "Microsoft", "WindowsApps", "winget.exe");
-                if (File.Exists(p)) return true;
-                string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? "";
-                foreach (string dir in pathEnv.Split(';'))
-                {
-                    if (dir.Trim().Length == 0) continue;
-                    if (File.Exists(Path.Combine(dir.Trim(), "winget.exe"))) return true;
-                }
-            }
-            catch { }
-            return false;
+            return Path.Combine(Path.GetTempPath(), "winsdksetup.exe");
+        }
+
+        // 静默最小安装：SigningTools 组件含 Inf2Cat/Signtool
+        public static string SilentArgs()
+        {
+            return "/features OptionId.SigningTools /q /norestart";
+        }
+
+        // 静默安装按钮文案
+        public static string InstallButtonText()
+        {
+            return "安装 Windows SDK 签名工具\r\n（自动下载微软官方安装器，含 Inf2Cat）";
         }
     }
 
     // ==========================================================================
-    // 进程执行与 PowerShell（EncodedCommand 规避引号转义）
+    // 进程执行与 PowerShell（EncodedCommand 规避引号转义；输出统一 UTF-8 解码，
+    // 修复 cmd/powershell 中文输出乱码）
     // ==========================================================================
     internal class ProcResult
     {
@@ -355,6 +390,9 @@ namespace LenovoLJ2400Setup
 
     internal static class Proc
     {
+        // 子进程输出统一按 UTF-8 解码
+        public static readonly Encoding OutputEncoding = Encoding.UTF8;
+
         public static ProcResult Run(string exe, string arguments, int timeoutMs)
         {
             ProcResult r = new ProcResult();
@@ -365,8 +403,8 @@ namespace LenovoLJ2400Setup
                 psi.RedirectStandardOutput = true;
                 psi.RedirectStandardError = true;
                 psi.CreateNoWindow = true;
-                psi.StandardOutputEncoding = Encoding.Default;
-                psi.StandardErrorEncoding = Encoding.Default;
+                psi.StandardOutputEncoding = OutputEncoding;
+                psi.StandardErrorEncoding = OutputEncoding;
                 using (Process p = Process.Start(psi))
                 {
                     string so = p.StandardOutput.ReadToEnd();
@@ -447,7 +485,7 @@ namespace LenovoLJ2400Setup
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct DRIVER_INFO_2
         {
-            public string pName;         // 驱动名（v4 下即 INF 型号名）
+            public string pName;         // 驱动名（打印模型下即 INF 型号名）
             public string pEnvironment;
             public string pDriverPath;
             public string pDataFile;
@@ -476,7 +514,7 @@ namespace LenovoLJ2400Setup
             finally { ClosePrinter(h); }
         }
 
-        // 枚举驱动 store 中的驱动名（路线1 续装后验证 27 型号全部进 store）
+        // 枚举驱动 store 中的驱动名（签名安装路线续装后验证 27 型号全部进 store）
         public static List<string> EnumDriverNames()
         {
             List<string> names = new List<string>();
@@ -517,7 +555,7 @@ namespace LenovoLJ2400Setup
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_logPath));
                 if (!File.Exists(_logPath))
-                    File.WriteAllText(_logPath, "==== LJ2400WoA 安装日志 v2 ====" + Environment.NewLine);
+                    File.WriteAllText(_logPath, "==== LJ2400WoA 安装日志 ====" + Environment.NewLine);
             }
             catch { /* 日志目录创建失败不阻断安装主流程 */ }
         }
@@ -537,7 +575,7 @@ namespace LenovoLJ2400Setup
     }
 
     // ==========================================================================
-    // 路线1 签名工作流：inf2cat → 自签 .cat → 证书入 TrustedPublisher → testsigning
+    // 签名安装路线签名工作流：inf2cat → 自签 .cat → 证书入 TrustedPublisher → testsigning
     // ==========================================================================
     internal static class SigningWorkflow
     {
@@ -551,7 +589,7 @@ namespace LenovoLJ2400Setup
             if (r.ExitCode != 0)
             {
                 logger.Log("[签名①] 失败。常见原因：INF 的 [Version] 节缺少 CatalogFile 指令" +
-                    "（v4 需 CatalogFile.NTx64 / CatalogFile.NTarm64 与 /os 列表对应），由驱动包生成任务补齐后重试。");
+                    "（需 CatalogFile.NTx64 / CatalogFile.NTarm64 与 /os 列表对应），由驱动包生成任务补齐后重试。");
                 return false;
             }
             string[] cats = Directory.GetFiles(driverDir, "*.cat");
@@ -615,7 +653,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
     }
 
     // ==========================================================================
-    // 自检入口实现（/selftest-state、/selftest-arch）
+    // 自检入口实现（/selftest-state、/selftest-arch、/selftest-sdk）
     // ==========================================================================
     internal static class SelfTest
     {
@@ -638,7 +676,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             {
                 StateRecord w = new StateRecord();
                 w.State = st;
-                w.Route = "v4signed";
+                w.Route = "signed";
                 w.Model = "Lenovo LJ2405";
                 w.Queue = "自检队列" + st;
                 w.Connection = "net";
@@ -688,6 +726,41 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             return fail == 0 ? 0 : 1;
         }
 
+        // SDK 引导单测：打印下载直链、静默命令、探测路径顺序（不实际下载）
+        public static int RunSdk(string outPath)
+        {
+            StringBuilder sb = new StringBuilder("==== LJ2400Setup 自检：SDK 引导 ====\r\n");
+            int fail = 0;
+            sb.Append("当前架构：" + ArchDetect.ArchName(ArchDetect.GetArch()) +
+                (ArchDetect.IsArm64() ? "（WoA）" : "") + "\r\n");
+            sb.Append("下载直链：" + SdkInstaller.DownloadUrl + "（微软官方 Windows SDK 安装器，x86 二进制，WoA 模拟层可运行）\r\n");
+            sb.Append("本地安装器路径：" + SdkInstaller.InstallerPath() + "\r\n");
+            sb.Append("静默命令：winsdksetup.exe " + SdkInstaller.SilentArgs() + "（SigningTools 组件含 Inf2Cat/Signtool）\r\n");
+            sb.Append("异常路径：静默退出码非 0 或探测仍失败 → 自动转 GUI 安装器 → 「重新检测 Inf2Cat」\r\n");
+            sb.Append("官方下载页：" + SdkInstaller.OfficialPageUrl + "\r\n");
+            sb.Append("子进程输出解码：" + Proc.OutputEncoding.WebName + "\r\n");
+            Check(sb, ref fail, SdkInstaller.DownloadUrl == "https://go.microsoft.com/fwlink/?linkid=2382519",
+                "官方安装器下载直链常量正确");
+            Check(sb, ref fail, SdkInstaller.SilentArgs().Contains("OptionId.SigningTools")
+                && SdkInstaller.SilentArgs().Contains("/q") && SdkInstaller.SilentArgs().Contains("/norestart"),
+                "静默安装参数含 SigningTools 组件 + /q + /norestart");
+            Check(sb, ref fail, SdkInstaller.OfficialPageUrl.StartsWith("https://learn.microsoft.com/"),
+                "官方下载页 URL 常量正确");
+            Check(sb, ref fail, Proc.OutputEncoding == Encoding.UTF8,
+                "子进程输出统一 UTF-8 解码");
+            Check(sb, ref fail, Inf2CatLocator.SearchRoots().Count >= 2,
+                "inf2cat 探测根数量 ≥2（Windows Kits 双根常驻）");
+            Check(sb, ref fail, Inf2CatLocator.SubOrderText.Contains("ARM64") && Inf2CatLocator.SubOrderText.Contains("x86")
+                && Inf2CatLocator.SubOrderText.Contains("x64"),
+                "子目录探测顺序含 ARM64\\、x86\\、x64\\（ARM64 机上 x86 版经模拟层可用）");
+            sb.Append(Inf2CatLocator.DescribeSearch());
+            string hit = Inf2CatLocator.Find();
+            sb.Append("inf2cat 命中：" + (hit ?? "未检测到（本机未装 SDK 属预期，UI 引导安装）") + "\r\n");
+            sb.Append(fail == 0 ? "[PASS] SDK 引导自检通过\r\n" : "[FAIL] " + fail + " 项失败\r\n");
+            File.WriteAllText(outPath, sb.ToString(), Encoding.UTF8);
+            return fail == 0 ? 0 : 1;
+        }
+
         private static void Check(StringBuilder sb, ref int fail, bool ok, string name)
         {
             sb.Append((ok ? "  [PASS] " : "  [FAIL] ") + name + "\r\n");
@@ -697,8 +770,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
 
     // ==========================================================================
     // 安装主窗体
-    // UI 主次：路线1（v4 签名）为主推默认且在 ARM64 上是唯一显眼路线；
-    //          路线3（IPP）为第二入口；路线2（v3）在高级选项折叠区内、仅 x64 展开
+    // 仅两条路线（ARM64/x64 一致）：签名安装路线（推荐）／ IPP 路线（基础打印）
     // ==========================================================================
     internal class SetupForm : Form
     {
@@ -706,22 +778,20 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         private readonly string _driverSrcDir;   // exe 同目录 driver\
         private readonly string _workRoot;       // %ProgramData%\LenovoLJ2400WoA
         private readonly string _driverDstDir;   // %ProgramData%\LenovoLJ2400WoA\driver
-        private readonly string _infDstPath;     // 目标 v4 INF 路径
+        private readonly string _infDstPath;     // 目标 INF 路径
         private string _inf2catPath;             // inf2cat.exe 探测缓存
 
-        // 路线选择：路线1 / 路线3 为主界面单选；路线2 在高级折叠面板内
+        // 路线选择：签名安装路线 / IPP 路线
         private RadioButton _rbRouteSigned;
         private RadioButton _rbRouteIpp;
-        private RadioButton _rbRouteV3;
-        private CheckBox _chkShowAdvanced;       // 高级选项折叠开关
-        private Panel _panelAdvanced;            // 高级选项折叠面板（ARM64 上整体隐藏）
-        private CheckBox _chkAdvanced;           // v1 直装链开关
-        private Label _lblV3Status;              // v3 包/架构状态
         private Label _lblRecommend;             // 自动推荐
         private Label _lblRouteHint;             // 路线动态提示
-        private Button _btnInstallSdk;           // 路线1 缺 inf2cat 时一键装 SDK
-        private Button _btnIppAdd;               // 路线3 IPP 自动添加
-        private Button _btnIppSettings;          // 路线3 打开系统打印设置
+        private Button _btnInstallSdk;           // 一键下载并安装 SDK 签名工具（官方安装器直链）
+        private Button _btnSdkPage;              // 打开官方下载页（次入口）
+        private Button _btnRedetect;             // 重新检测 Inf2Cat（GUI 安装完成后用）
+        private ProgressBar _pbarSdk;            // 安装器下载进度
+        private Button _btnIppAdd;               // IPP 自动添加
+        private Button _btnIppSettings;          // 打开系统打印设置
 
         private RadioButton _rbUsb;
         private RadioButton _rbNet;
@@ -759,31 +829,30 @@ Write-Output ('SIGN_OK ' + $s.Status)";
                 (ArchDetect.IsArm64() ? "（WoA）" : "") + "；inf2cat：" + (_inf2catPath ?? "未检测到"));
             _logger.Log("驱动包来源：" + _driverSrcDir);
 
-            ApplyArchitectureUi();
             _lblRecommend.Text = ComputeRecommendation();
             UpdateRouteUi();
         }
 
         // ------------------------------------------------------------------
-        // UI 构建（简体中文；主次：签名路线 → IPP → 高级折叠区 v3）
+        // UI 构建（简体中文；两条路线：签名安装 → IPP）
         // ------------------------------------------------------------------
         private void BuildUi()
         {
-            Text = "联想 LJ24/LJ26/M74/M76 系列打印机驱动安装 v2（Windows on ARM / x64 通用）";
+            Text = "联想 LJ24/LJ26/M74/M76 系列打印机驱动安装（Windows on ARM / x64 通用）";
             ClientSize = new System.Drawing.Size(720, 700);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
 
-            // —— 路线1：v4 签名路线（主推默认）——
+            // —— 签名安装路线（推荐，主推默认）——
             _rbRouteSigned = new RadioButton();
-            _rbRouteSigned.Text = "路线1：v4 签名路线（主推 · Windows on ARM / x64 通用）";
+            _rbRouteSigned.Text = "签名安装路线（推荐）";
             _rbRouteSigned.SetBounds(16, 34, 688, 22);
             _rbRouteSigned.Checked = true;
 
-            // —— 路线3：IPP 兜底（第二入口）——
+            // —— IPP 路线（基础打印，第二入口）——
             _rbRouteIpp = new RadioButton();
-            _rbRouteIpp.Text = "路线3：IPP 兜底（签名路线不可用时的第二入口 · WoA 上立即可用的基础打印）";
+            _rbRouteIpp.Text = "IPP 路线（基础打印）";
             _rbRouteIpp.SetBounds(16, 58, 688, 22);
 
             _lblRecommend = new Label();
@@ -795,10 +864,28 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             _lblRouteHint.SetBounds(16, 106, 534, 60);
 
             _btnInstallSdk = new Button();
-            _btnInstallSdk.Text = "安装 Windows SDK（含 Inf2Cat）";
-            _btnInstallSdk.SetBounds(560, 106, 146, 28);
+            _btnInstallSdk.Text = SdkInstaller.InstallButtonText();
+            _btnInstallSdk.SetBounds(560, 106, 146, 44);
             _btnInstallSdk.Visible = false;
             _btnInstallSdk.Click += _btnInstallSdk_Click;
+
+            _btnSdkPage = new Button();
+            _btnSdkPage.Text = "打开官方下载页";
+            _btnSdkPage.SetBounds(560, 154, 146, 28);
+            _btnSdkPage.Visible = false;
+            _btnSdkPage.Click += _btnSdkPage_Click;
+
+            _btnRedetect = new Button();
+            _btnRedetect.Text = "重新检测 Inf2Cat";
+            _btnRedetect.SetBounds(560, 186, 146, 28);
+            _btnRedetect.Visible = false;
+            _btnRedetect.Click += _btnRedetect_Click;
+
+            _pbarSdk = new ProgressBar();
+            _pbarSdk.SetBounds(560, 218, 146, 18);
+            _pbarSdk.Minimum = 0;
+            _pbarSdk.Maximum = 100;
+            _pbarSdk.Visible = false;
 
             _btnIppAdd = new Button();
             _btnIppAdd.Text = "通过 IPP 自动添加打印机";
@@ -814,7 +901,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
 
             GroupBox grpConn = new GroupBox();
             grpConn.Text = "连接方式";
-            grpConn.SetBounds(12, 172, 696, 112);
+            grpConn.SetBounds(12, 242, 696, 112);
 
             _rbUsb = new RadioButton();
             _rbUsb.Text = "USB 连接（自动识别已接入的设备与端口）";
@@ -834,65 +921,38 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             grpConn.Controls.Add(_rbNet);
             grpConn.Controls.Add(_rbDriverOnly);
 
-            // —— 高级选项折叠区（路线2 v3 + v1 直装链）——
-            _chkShowAdvanced = new CheckBox();
-            _chkShowAdvanced.Text = "展开高级选项（可选附加：v3 兼容路线 · 仅限 x64 机器，WoA 不适用）";
-            _chkShowAdvanced.SetBounds(16, 292, 688, 22);
-            _chkShowAdvanced.CheckedChanged += _chkShowAdvanced_CheckedChanged;
-
-            _panelAdvanced = new Panel();
-            _panelAdvanced.SetBounds(12, 316, 696, 104);
-            _panelAdvanced.BorderStyle = BorderStyle.FixedSingle;
-            _panelAdvanced.Visible = false;
-
-            _rbRouteV3 = new RadioButton();
-            _rbRouteV3.Text = "路线2：v3 兼容路线（可选附加，仅限 x64——WoA 不适用；执行时弹交互信任框）";
-            _rbRouteV3.SetBounds(16, 16, 664, 22);
-
-            _lblV3Status = new Label();
-            _lblV3Status.ForeColor = System.Drawing.Color.Gray;
-            _lblV3Status.SetBounds(16, 42, 664, 18);
-
-            _chkAdvanced = new CheckBox();
-            _chkAdvanced.Text = "v1 直装链：pnputil 预装 → printui 降级建队列（适合驱动已签名或测试签名已开启的环境）";
-            _chkAdvanced.SetBounds(16, 66, 664, 22);
-
-            _panelAdvanced.Controls.Add(_rbRouteV3);
-            _panelAdvanced.Controls.Add(_lblV3Status);
-            _panelAdvanced.Controls.Add(_chkAdvanced);
-
             Label lblIp = new Label();
             lblIp.Text = "打印机 IP / 主机名：";
-            lblIp.SetBounds(16, 430, 120, 20);
+            lblIp.SetBounds(16, 352, 120, 20);
 
             _txtIp = new TextBox();
-            _txtIp.SetBounds(142, 427, 200, 23);
+            _txtIp.SetBounds(142, 349, 200, 23);
             _txtIp.Enabled = false;
 
             Label lblModel = new Label();
             lblModel.Text = "INF 型号名：";
-            lblModel.SetBounds(16, 462, 120, 20);
+            lblModel.SetBounds(16, 384, 120, 20);
 
             _cboModel = new ComboBox();
             _cboModel.DropDownStyle = ComboBoxStyle.DropDownList;
-            _cboModel.SetBounds(142, 459, 280, 23);
+            _cboModel.SetBounds(142, 381, 280, 23);
             _cboModel.SelectedIndexChanged += _cboModel_SelectedIndexChanged;
 
             Label lblQueue = new Label();
             lblQueue.Text = "打印队列名称：";
-            lblQueue.SetBounds(16, 494, 120, 20);
+            lblQueue.SetBounds(16, 416, 120, 20);
 
             _txtQueue = new TextBox();
-            _txtQueue.SetBounds(142, 491, 280, 23);
+            _txtQueue.SetBounds(142, 413, 280, 23);
 
             _btnInstall = new Button();
             _btnInstall.Text = "开始安装";
-            _btnInstall.SetBounds(16, 528, 150, 34);
+            _btnInstall.SetBounds(16, 450, 150, 34);
             _btnInstall.Click += _btnInstall_Click;
 
             _btnOpenManager = new Button();
             _btnOpenManager.Text = "打开打印机管理";
-            _btnOpenManager.SetBounds(184, 528, 180, 34);
+            _btnOpenManager.SetBounds(184, 450, 180, 34);
             _btnOpenManager.Enabled = false;
             _btnOpenManager.Click += _btnOpenManager_Click;
 
@@ -901,12 +961,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             _txtLog.ReadOnly = true;
             _txtLog.ScrollBars = ScrollBars.Vertical;
             _txtLog.Font = new System.Drawing.Font("Consolas", 9F);
-            _txtLog.SetBounds(12, 570, 696, 100);
+            _txtLog.SetBounds(12, 492, 696, 176);
             _txtLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
             _lblLogPath = new Label();
             _lblLogPath.ForeColor = System.Drawing.Color.Gray;
-            _lblLogPath.SetBounds(16, 674, 690, 18);
+            _lblLogPath.SetBounds(16, 672, 690, 18);
             _lblLogPath.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
             Controls.Add(_rbRouteSigned);
@@ -914,11 +974,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             Controls.Add(_lblRecommend);
             Controls.Add(_lblRouteHint);
             Controls.Add(_btnInstallSdk);
+            Controls.Add(_btnSdkPage);
+            Controls.Add(_btnRedetect);
+            Controls.Add(_pbarSdk);
             Controls.Add(_btnIppAdd);
             Controls.Add(_btnIppSettings);
             Controls.Add(grpConn);
-            Controls.Add(_chkShowAdvanced);
-            Controls.Add(_panelAdvanced);
             Controls.Add(lblIp);
             Controls.Add(_txtIp);
             Controls.Add(lblModel);
@@ -932,53 +993,31 @@ Write-Output ('SIGN_OK ' + $s.Status)";
 
             _rbRouteSigned.CheckedChanged += RouteRadio_CheckedChanged;
             _rbRouteIpp.CheckedChanged += RouteRadio_CheckedChanged;
-            _rbRouteV3.CheckedChanged += RouteRadio_CheckedChanged;
         }
 
         // ------------------------------------------------------------------
-        // 架构相关的 UI 主次裁决（WoA：签名路线唯一显眼，高级区整体隐藏）
-        // ------------------------------------------------------------------
-        private void ApplyArchitectureUi()
-        {
-            if (ArchDetect.IsArm64())
-            {
-                // ARM64：路线2（v3）不适用 → 折叠开关与面板整体隐藏
-                _chkShowAdvanced.Visible = false;
-                _panelAdvanced.Visible = false;
-            }
-        }
-
-        // ------------------------------------------------------------------
-        // 当前路线：0=路线1 签名（默认）/ 1=路线2 v3（高级区内）/ 2=路线3 IPP
+        // 当前路线：0=签名安装路线（默认）/ 1=IPP 路线
         // ------------------------------------------------------------------
         private int CurrentRoute()
         {
-            if (_rbRouteV3.Checked) return 1;
-            if (_rbRouteIpp.Checked) return 2;
+            if (_rbRouteIpp.Checked) return 1;
             return 0;
         }
 
         // ------------------------------------------------------------------
-        // 型号表填充：常量 27 项 + INF 解析兜底（v4 与 v3 包均可解析追加）
+        // 型号表填充：常量 27 项 + INF 解析备用路径
         // ------------------------------------------------------------------
         private void FillModels()
         {
             _cboModel.Items.Clear();
             foreach (string m in Program.InfModelNames) _cboModel.Items.Add(m);
-            foreach (string inf in new string[]
+            foreach (string m in ParseInfModelNames(Path.Combine(_driverSrcDir, Program.InfFileName)))
             {
-                Path.Combine(_driverSrcDir, Program.InfFileName),
-                Path.Combine(_baseDir, Program.V3DirName, Program.V3InfFileName)
-            })
-            {
-                foreach (string m in ParseInfModelNames(inf))
-                {
-                    if (!_cboModel.Items.Contains(m)) _cboModel.Items.Add(m);
-                }
+                if (!_cboModel.Items.Contains(m)) _cboModel.Items.Add(m);
             }
         }
 
-        // 兜底：从 INF 文本解析 "Lenovo xxx" 型号名（驱动包更新时自动适配）
+        // 备用路径：从 INF 文本解析 "Lenovo xxx" 型号名（驱动包更新时自动适配）
         public static List<string> ParseInfModelNames(string infPath)
         {
             List<string> result = new List<string>();
@@ -1019,35 +1058,25 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // 路线自动推荐：ARM64 → 只推签名路线 + IPP（不显示 v3）；
-        //              x64 → 签名路线为主推，v3 在高级区
+        // 路线自动推荐（两架构 UI 一致：签名安装路线为主推、IPP 路线第二入口）
         // ------------------------------------------------------------------
         private string ComputeRecommendation()
         {
             bool arm = ArchDetect.IsArm64();
-            bool hasV3 = File.Exists(Path.Combine(_baseDir, Program.V3DirName, Program.V3InfFileName));
             if (arm)
             {
-                if (_inf2catPath != null)
-                    return "本机 ARM64：主推路线1 v4 签名路线（inf2cat 已就绪）；v3 兼容路线不适用于 WoA";
-                return "本机 ARM64：主推路线1 v4 签名路线（先一键安装 SDK 获取 Inf2Cat）；急用打印可立即用路线3 IPP 兜底";
+                if (_inf2catPath != null) return "本机 ARM64：推荐签名安装路线（inf2cat 已就绪）";
+                return "本机 ARM64：推荐签名安装路线（先安装 Windows SDK 签名工具获取 Inf2Cat）；急用打印可先用 IPP 路线（基础打印）";
             }
-            if (_inf2catPath != null)
-                return "本机 x64：主推路线1 v4 签名路线（inf2cat 已就绪）；v3 为高级选项中的可选附加" + (hasV3 ? "（v3 包已就绪）" : "");
-            return "本机 x64：主推路线1（需先一键安装 SDK）；急用可走路线3 IPP；v3 兼容路线在高级选项（可选附加）";
+            if (_inf2catPath != null) return "本机 x64：推荐签名安装路线（inf2cat 已就绪）";
+            return "本机 x64：推荐签名安装路线（先安装 Windows SDK 签名工具获取 Inf2Cat）；急用可先用 IPP 路线（基础打印）";
         }
 
         // ------------------------------------------------------------------
-        // 路线切换 UI（单选/折叠开关共用）
+        // 路线切换 UI
         // ------------------------------------------------------------------
         private void RouteRadio_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateRouteUi();
-        }
-
-        private void _chkShowAdvanced_CheckedChanged(object sender, EventArgs e)
-        {
-            _panelAdvanced.Visible = _chkShowAdvanced.Checked && !ArchDetect.IsArm64();
             UpdateRouteUi();
         }
 
@@ -1055,17 +1084,10 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         {
             int route = CurrentRoute();
             _btnInstallSdk.Visible = false;
+            _btnSdkPage.Visible = false;
+            _btnRedetect.Visible = false;
             _btnIppAdd.Visible = false;
             _btnIppSettings.Visible = false;
-
-            // 高级面板内的 v3 状态提示（仅 x64 面板可见时更新）
-            if (!ArchDetect.IsArm64())
-            {
-                bool v3ok = File.Exists(Path.Combine(_baseDir, Program.V3DirName, Program.V3InfFileName));
-                _lblV3Status.Text = v3ok
-                    ? "v3 兼容包就绪：" + Path.Combine(_baseDir, Program.V3DirName, Program.V3InfFileName)
-                    : "未找到 v3 兼容包（LJ2400V3.INF + 27 个 ASCII GPD，由 v3 生成任务产出到 exe 同目录 v3pkg\\）";
-            }
 
             if (route == 0)
             {
@@ -1073,31 +1095,22 @@ Write-Output ('SIGN_OK ' + $s.Status)";
                 _txtIp.Enabled = _rbNet.Checked;
                 if (_inf2catPath == null)
                 {
-                    _lblRouteHint.Text = "路线1 前置：未检测到 inf2cat.exe（Windows SDK 组件）。点右侧按钮一键安装，" +
-                        "\r\n或下载 EWDK：https://learn.microsoft.com/windows-hardware/download-the-wdk";
+                    _lblRouteHint.Text = "签名安装路线 前置：未检测到 inf2cat.exe（Windows SDK 组件）。点右侧按钮自动下载微软官方安装器" +
+                        "并静默安装签名工具组件，\r\n或点「打开官方下载页」手动获取安装器（官网提供 ARM64 兼容组件可选）。";
                     _btnInstallSdk.Visible = true;
+                    _btnSdkPage.Visible = true;
+                    _btnRedetect.Visible = true;
                 }
                 else
                 {
-                    _lblRouteHint.Text = "路线1 就绪（inf2cat：" + _inf2catPath + "）" +
+                    _lblRouteHint.Text = "签名安装路线 就绪（inf2cat：" + _inf2catPath + "）" +
                         "\r\n流程：inf2cat → 自签 .cat → 证书入 TrustedPublisher → testsigning on → 重启后自动续装 27 型号";
-                }
-            }
-            else if (route == 1)
-            {
-                if (ArchDetect.IsArm64())
-                {
-                    _lblRouteHint.Text = "路线2 仅支持 x64：v3 渲染二进制按架构绑定，WoA 请走路线1或路线3。";
-                }
-                else
-                {
-                    _lblRouteHint.Text = "路线2（v3）执行时会弹出 Windows 信任提示，请点击『仍要安装此驱动程序软件』" +
-                        "\r\n（实测无人点击时进程以 0x4C7 结束，界面会提示重试）。";
                 }
             }
             else
             {
-                _lblRouteHint.Text = "路线3 IPP（免驱动、免签名）：网络型号 " + string.Join("、", IppCapableModels().ToArray()) +
+                _lblRouteHint.Text = "IPP 路线（免驱动、免签名，无需 SDK，基础打印立即可用）：网络型号 " +
+                    string.Join("、", IppCapableModels().ToArray()) +
                     "\r\nIPP 模式下省墨等 OEM 附加功能由设备 Web 管理（http://<ip>/）设置。";
                 _btnIppAdd.Visible = true;
                 _btnIppSettings.Visible = true;
@@ -1108,7 +1121,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // USB 设备识别（不变）
+        // USB 设备识别
         // ------------------------------------------------------------------
         private void TryDetectUsbDevice()
         {
@@ -1220,17 +1233,17 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // 事件：网络模式启用 IP 输入框（路线3 除外）
+        // 事件：网络模式启用 IP 输入框（IPP 路线除外）
         // ------------------------------------------------------------------
         private void _rbNet_CheckedChanged(object sender, EventArgs e)
         {
-            if (CurrentRoute() != 2) _txtIp.Enabled = _rbNet.Checked;
+            if (CurrentRoute() != 1) _txtIp.Enabled = _rbNet.Checked;
         }
 
         private void _cboModel_SelectedIndexChanged(object sender, EventArgs e)
         {
             string m = _cboModel.SelectedItem as string;
-            if (!string.IsNullOrEmpty(m) && CurrentRoute() != 2) _txtQueue.Text = m;
+            if (!string.IsNullOrEmpty(m) && CurrentRoute() != 1) _txtQueue.Text = m;
         }
 
         // ------------------------------------------------------------------
@@ -1251,7 +1264,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             if (st.State == InstallStates.PendingReboot)
             {
                 DialogResult dr = MessageBox.Show(
-                    "检测到上次「路线1 v4 签名」已完成签名并等待重启。\r\n" +
+                    "检测到上次「签名安装路线」已完成签名并等待重启。\r\n" +
                     "是否现在自动完成剩余安装？（pnputil 进 store → 27 型号验证 → 建队列）",
                     "继续安装", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr != DialogResult.Yes)
@@ -1287,14 +1300,14 @@ Write-Output ('SIGN_OK ' + $s.Status)";
 
             if (st.State == InstallStates.PendingSignature)
             {
-                _logger.Log("[状态机] 上次签名阶段未完成（" + st.Note + "）——可在路线1重试，签名成功后会重新推进状态。");
+                _logger.Log("[状态机] 上次签名阶段未完成（" + st.Note + "）——可在签名安装路线重试，签名成功后会重新推进状态。");
                 _lblRecommend.ForeColor = System.Drawing.Color.DarkOrange;
-                _lblRecommend.Text = "上次路线1签名阶段中断：" + st.Note + "（可在路线1重试）";
+                _lblRecommend.Text = "上次签名阶段中断：" + st.Note + "（可在签名安装路线重试）";
                 return;
             }
             if (st.State == InstallStates.Ready)
             {
-                _logger.Log("[状态机] 驱动已进 store（ready）——可续建队列或用高级选项完成安装。");
+                _logger.Log("[状态机] 驱动已进 store（ready）——可续建队列完成安装。");
             }
             if (st.State == InstallStates.Installed)
             {
@@ -1303,14 +1316,14 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // 路线1：v4 签名路线（inf2cat → 自签 → 信任链 → testsigning → 重启续装）
+        // 签名安装路线：inf2cat → 自签 → 信任链 → testsigning → 重启续装
         // ------------------------------------------------------------------
-        private async Task<bool> RunRouteV4Signed(string model, string queueName, string ip, bool netMode, bool usbMode)
+        private async Task<bool> RunRouteSigned(string model, string queueName, string ip, bool netMode, bool usbMode)
         {
             if (_inf2catPath == null)
             {
-                MessageBox.Show("未检测到 inf2cat.exe（路线1 前置条件）。\r\n请点「安装 Windows SDK（含 Inf2Cat）」一键安装，" +
-                    "\r\n或下载 EWDK：https://learn.microsoft.com/windows-hardware/download-the-wdk",
+                MessageBox.Show("未检测到 inf2cat.exe（签名安装路线 前置条件）。\r\n请点「安装 Windows SDK 签名工具」自动下载微软官方安装器并静默安装，" +
+                    "\r\n或点「打开官方下载页」手动获取安装器。",
                     "缺少 Inf2Cat", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -1319,12 +1332,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
                     Program.InfFileName);
 
             // 拷贝驱动包到工作目录（inf2cat 与后续 pnputil 都用这份）
-            _logger.Log("[路线1] 步骤1：复制驱动包 → " + _driverDstDir);
+            _logger.Log("[签名] 步骤1：复制驱动包 → " + _driverDstDir);
             CopyDriverPackage();
 
             StateRecord st = new StateRecord();
             st.State = InstallStates.PendingSignature;
-            st.Route = "v4signed";
+            st.Route = "signed";
             st.Model = model;
             st.Queue = queueName;
             st.Connection = _rbDriverOnly.Checked ? "none" : (netMode ? "net" : "usb");
@@ -1332,12 +1345,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             st.Note = "inf2cat + 签名进行中";
             st.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             StateStore.Write(st);
-            _logger.Log("[路线1] state.json = pending_signature");
+            _logger.Log("[签名] state.json = pending_signature");
 
             // testsigning 现状（已开启则签名后免重启直接续装）
             ProcResult bc = await Task.Run(delegate { return Proc.Run("bcdedit.exe", "/enum {current}", 60000); });
             bool alreadyOn = SigningWorkflow.IsTestSigningOn(bc);
-            _logger.Log("[路线1] testsigning 当前状态：" + (alreadyOn ? "已开启（本次免重启）" : "未开启（签名后需重启一次）"));
+            _logger.Log("[签名] testsigning 当前状态：" + (alreadyOn ? "已开启（本次免重启）" : "未开启（签名后需重启一次）"));
 
             bool ok = await Task.Run(delegate { return SigningWorkflow.Run(_inf2catPath, _driverDstDir, alreadyOn, _logger); });
             if (!ok)
@@ -1351,7 +1364,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             if (alreadyOn)
             {
                 // 测试签名已开启：直接续装，免重启
-                _logger.Log("[路线1] 测试签名已开启，直接续装（pnputil → 队列）。");
+                _logger.Log("[签名] 测试签名已开启，直接续装（pnputil → 队列）。");
                 st.State = InstallStates.Ready;
                 st.Note = "签名完成，直接续装";
                 st.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -1364,11 +1377,11 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             st.Note = "签名完成，等待重启续装";
             st.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             StateStore.Write(st);
-            _logger.Log("[路线1] state.json = pending_reboot（已记录型号/队列/连接方式，重启后自动续装）");
+            _logger.Log("[签名] state.json = pending_reboot（已记录型号/队列/连接方式，重启后自动续装）");
             MessageBox.Show(
                 "签名与测试签名配置完成。\r\n\r\n需重启一次（桌面会短暂显示「测试模式」水印，属正常现象）。\r\n" +
                 "重启后再次运行本安装器，将自动完成剩余安装（pnputil 进 store → 建队列）。",
-                "路线1：等待重启", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "签名安装：等待重启", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
 
@@ -1398,7 +1411,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
                 bad.Queue = st.Queue;
                 bad.Connection = st.Connection;
                 bad.Ip = st.Ip;
-                bad.Note = "pnputil 被拒（0xBCB 常见）——确认测试签名与 TrustedPublisher 后重走路线1";
+                bad.Note = "pnputil 被拒（0xBCB 常见）——确认测试签名与 TrustedPublisher 后重走签名安装路线";
                 bad.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 StateStore.Write(bad);
                 return false;
@@ -1408,7 +1421,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             List<string> drivers = await Task.Run(delegate { return WinspoolNative.EnumDriverNames(); });
             int matched = CountInstalledModels(drivers);
             _logger.Log("[续装③] 驱动 store 型号验证：" + matched + "/27" +
-                (matched == Program.InfModelNames.Length ? "（全部就位）" : "（部分进 store——v4 包内全部型号共用同一 INF，缺失通常是 INF 型号节不全）"));
+                (matched == Program.InfModelNames.Length ? "（全部就位）" : "（部分进 store——包内全部型号共用同一 INF，缺失通常是 INF 型号节不全）"));
             if (matched == 0)
             {
                 _logger.Log("[续装③] store 中未找到任何本系列驱动——pnputil 输出见上，检查 INF。");
@@ -1425,7 +1438,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             ready.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             StateStore.Write(ready);
 
-            // ④ 建队列（仅驱动模式跳过）：v4 用 Add-Printer -DriverName，失败降级 printui
+            // ④ 建队列（仅驱动模式跳过）：用 Add-Printer -DriverName，失败降级 printui
             if (st.Connection == "none")
             {
                 _logger.Log("[续装④] 连接方式为仅驱动，跳过建队列。");
@@ -1485,7 +1498,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             return n;
         }
 
-        // v4 队列创建：Add-Printer -Name -DriverName -PortName
+        // 队列创建：Add-Printer -Name -DriverName -PortName
         private async Task<bool> CreateQueueViaAddPrinter(string queue, string driverName, string port)
         {
             _logger.Log("[续装④] powershell Add-Printer（队列 " + queue + "，驱动 " + driverName + "，端口 " + port + "）");
@@ -1498,81 +1511,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // 路线2：v3 兼容路线（高级选项折叠区内；仅 x64；0x4C7=取消 → 提示重试）
-        // ------------------------------------------------------------------
-        private async Task<bool> RunRouteV3(string model, string queueName, string ip, bool netMode, bool usbMode)
-        {
-            string v3Dir = Path.Combine(_baseDir, Program.V3DirName);
-            string v3Inf = Path.Combine(v3Dir, Program.V3InfFileName);
-            if (ArchDetect.IsArm64())
-            {
-                _logger.Log("[路线2] 本机为 ARM64——v3 渲染二进制按架构绑定，WoA 不适用。请走路线1（签名）或路线3（IPP）。");
-                MessageBox.Show("路线2 仅支持 x64：v3 驱动的渲染二进制按架构绑定，WoA 不适用。\r\n请走路线1（v4 签名）或路线3（IPP 兜底）。",
-                    "架构不支持", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            if (!File.Exists(v3Inf))
-            {
-                _logger.Log("[路线2] 未找到 v3 兼容包：" + v3Inf + "（由 v3 生成任务产出）");
-                MessageBox.Show("未找到 v3 兼容包：\r\n" + v3Inf + "\r\n请确认 LJ2400V3.INF 与 27 个 GPD 已放入 exe 同目录 v3pkg\\。",
-                    "缺少 v3 包", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            // 执行前明确提示信任框操作（实测无人点击 → 0x4C7 取消）
-            DialogResult dr = MessageBox.Show(
-                "即将安装未签名的 v3 驱动并创建队列。\r\n" +
-                "执行过程中将弹出 Windows 信任提示，请点击『仍要安装此驱动程序软件』。\r\n" +
-                "（若未点击，安装进程将以 0x4C7 结束，可重试）\r\n\r\n是否继续？",
-                "路线2：v3 兼容路线（可选附加，仅限 x64）", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dr != DialogResult.Yes)
-            {
-                _logger.Log("[路线2] 用户在确认框取消。");
-                return false;
-            }
-
-            string port = await ResolvePort(netMode, ip);
-            string args = "/if /b \"" + queueName + "\" /f \"" + v3Inf + "\" /r \"" + port + "\" /m \"" + model + "\"";
-            _logger.Log("[路线2] rundll32 printui.dll,PrintUIEntry " + args + "（等待信任框，最长 10 分钟）");
-            ProcResult r = await Task.Run(delegate { return Proc.Run("rundll32.exe", "printui.dll,PrintUIEntry " + args, 600000); });
-            _logger.Log("[路线2] printui 退出码 " + r.ExitCode + "（0x" + r.ExitCode.ToString("X") + "）\r\n" + Indent(r.Output));
-            if (r.ExitCode == 1223) // 0x4C7 = ERROR_CANCELLED
-            {
-                _logger.Log("[路线2] 0x4C7：信任框被取消或无人点击——请重试，弹出提示时点『仍要安装此驱动程序软件』。");
-                MessageBox.Show("信任框被取消（0x4C7）。\r\n请重新点「开始安装」，并在弹出 Windows 信任提示时点击『仍要安装此驱动程序软件』。",
-                    "需要重试", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            if (r.ExitCode != 0)
-            {
-                _logger.Log("[路线2] printui 非零退出码——检查型号名与 INF 一致、端口存在后重试。");
-                return false;
-            }
-
-            WinspoolNative.PRINTER_INFO_2? info = WinspoolNative.GetPrinterInfo2(queueName);
-            if (!info.HasValue || !string.Equals(info.Value.pDriverName, model, StringComparison.OrdinalIgnoreCase))
-            {
-                _logger.Log("[路线2] 队列验证失败：期望 \"" + model + "\"，实际 " +
-                    (info.HasValue ? "\"" + info.Value.pDriverName + "\"" : "队列不存在"));
-                return false;
-            }
-            _logger.Log("[路线2] 队列验证通过：\"" + queueName + "\" 驱动=\"" + info.Value.pDriverName + "\" 端口=" + info.Value.pPortName);
-            InstallManagerAndShortcuts();
-            StateRecord done = new StateRecord();
-            done.State = InstallStates.Installed;
-            done.Route = "v3";
-            done.Model = model;
-            done.Queue = queueName;
-            done.Connection = netMode ? "net" : "usb";
-            done.Ip = netMode ? ip : "";
-            done.Note = "v3 路线队列验证通过";
-            done.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            StateStore.Write(done);
-            return true;
-        }
-
-        // ------------------------------------------------------------------
-        // 路线3：IPP 兜底（Add-Printer -IppUrl；OEM 功能走设备 Web 管理）
+        // IPP 路线：Add-Printer -IppUrl（免驱动、免签名；OEM 功能走设备 Web 管理）
         // ------------------------------------------------------------------
         private async Task<bool> RunIppAdd()
         {
@@ -1588,12 +1527,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
                 MessageBox.Show("请填写队列名称。", "缺少参数", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            _logger.Log("[路线3] powershell Add-Printer -IppUrl http://" + ip + "/ipp/print（队列：" + queue + "）");
+            _logger.Log("[IPP] powershell Add-Printer -IppUrl http://" + ip + "/ipp/print（队列：" + queue + "）");
             ProcResult r = await Task.Run(delegate
             {
                 return Psh.Run("Add-Printer -Name '" + queue + "' -IppUrl 'http://" + ip + "/ipp/print'", 90000);
             });
-            _logger.Log("[路线3] Add-Printer 退出码 " + r.ExitCode + "\r\n" + Indent(r.Output));
+            _logger.Log("[IPP] Add-Printer 退出码 " + r.ExitCode + "\r\n" + Indent(r.Output));
             if (r.ExitCode != 0)
             {
                 MessageBox.Show("IPP 添加失败。\r\n可操作提示：确认设备支持 IPP/AirPrint 且 IP 可达（ping " + ip +
@@ -1604,10 +1543,10 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             WinspoolNative.PRINTER_INFO_2? info = WinspoolNative.GetPrinterInfo2(queue);
             if (!info.HasValue)
             {
-                _logger.Log("[路线3] 队列创建后未查询到（winspool）——检查队列名是否重复。");
+                _logger.Log("[IPP] 队列创建后未查询到（winspool）——检查队列名是否重复。");
                 return false;
             }
-            _logger.Log("[路线3] IPP 队列就绪：\"" + queue + "\" 端口=" + info.Value.pPortName +
+            _logger.Log("[IPP] IPP 队列就绪：\"" + queue + "\" 端口=" + info.Value.pPortName +
                 "（省墨等 OEM 功能由设备 Web 管理 http://" + ip + "/ 设置）");
             InstallManagerAndShortcuts();
             _btnOpenManager.Enabled = File.Exists(Path.Combine(_workRoot, "LJ2400Manager.exe"));
@@ -1625,12 +1564,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             if (_installing) return;
             _installing = true;
             _btnIppAdd.Enabled = false;
-            _logger.Log("==== 路线3：IPP 兜底 ====");
+            _logger.Log("==== IPP 路线（基础打印）====");
             bool ok = false;
             try { ok = await RunIppAdd(); }
             catch (Exception ex)
             {
-                _logger.Log("[路线3][异常] " + ex.Message);
+                _logger.Log("[IPP][异常] " + ex.Message);
                 MessageBox.Show("IPP 添加异常：" + ex.Message + "\r\n日志：\r\n" + _logger.LogPath,
                     "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1641,46 +1580,180 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         }
 
         // ------------------------------------------------------------------
-        // 路线1 缺 inf2cat 时的一键 SDK 安装
+        // 官方 SDK 下载页入口（次入口）
         // ------------------------------------------------------------------
-        private async void _btnInstallSdk_Click(object sender, EventArgs e)
+        private void _btnSdkPage_Click(object sender, EventArgs e)
         {
-            if (!WingetLocator.Exists())
+            try
             {
-                MessageBox.Show("未检测到 winget（应用安装程序）。\r\n请手动安装 Windows SDK（勾选 Signing Tools 组件），" +
-                    "\r\n或下载 EWDK：https://learn.microsoft.com/windows-hardware/download-the-wdk",
-                    "缺少 winget", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                Process.Start(SdkInstaller.OfficialPageUrl);
+                _logger.Log("[SDK] 已打开官方下载页：" + SdkInstaller.OfficialPageUrl);
             }
-            _btnInstallSdk.Enabled = false;
-            _logger.Log("[SDK] winget install Microsoft.WindowsSDK（含 Inf2Cat，体积较大，耐心等待）……");
-            ProcResult r = await Task.Run(delegate
+            catch (Exception ex)
             {
-                return Proc.Run("winget.exe", "install Microsoft.WindowsSDK --accept-source-agreements --accept-package-agreements", 1800000);
-            });
-            _logger.Log("[SDK] winget 退出码 " + r.ExitCode + "\r\n" + Indent(r.Output));
-            _inf2catPath = Inf2CatLocator.Find();
-            if (_inf2catPath != null)
-            {
-                _logger.Log("[SDK] inf2cat 已就绪：" + _inf2catPath);
+                MessageBox.Show("打开官方下载页失败：" + ex.Message + "\r\n请手动访问：\r\n" + SdkInstaller.OfficialPageUrl,
+                    "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                _logger.Log("[SDK] 安装后仍未检测到 inf2cat——SDK 安装时可能未含 Signing Tools 组件，或需重启后重新探测。");
-            }
-            _btnInstallSdk.Enabled = true;
-            _lblRecommend.Text = ComputeRecommendation();
-            UpdateRouteUi();
         }
 
         // ------------------------------------------------------------------
-        // 开始安装：按路线分派（勾选 v1 直装链时优先走 v1 流程）
+        // GUI 安装完成后重新检测 Inf2Cat
+        // ------------------------------------------------------------------
+        private void _btnRedetect_Click(object sender, EventArgs e)
+        {
+            _inf2catPath = Inf2CatLocator.Find();
+            if (_inf2catPath != null)
+            {
+                _logger.Log("[SDK] 重新检测：inf2cat 已就绪：" + _inf2catPath);
+                _lblRecommend.Text = ComputeRecommendation();
+                UpdateRouteUi();
+                MessageBox.Show("inf2cat 已就绪，签名安装路线可继续。", "重新检测", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                _logger.Log("[SDK] 重新检测：仍未检测到 inf2cat——确认 SDK 安装勾选了 SigningTools 组件后重试，或用图形安装器完成安装。");
+                MessageBox.Show("仍未检测到 inf2cat。\r\n可操作提示：确认 SDK 安装勾选了「Windows SDK Signing Tools」组件；或重新运行图形安装器完成后再点本按钮。",
+                    "重新检测", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // ------------------------------------------------------------------
+        // SDK 引导：官方安装器直链下载 → SigningTools 静默安装 → 探测；
+        // 静默退出码非 0 或探测仍失败 → 自动转 GUI 安装器
+        // ------------------------------------------------------------------
+        private async void _btnInstallSdk_Click(object sender, EventArgs e)
+        {
+            if (_installing) return;
+            _installing = true;
+            _btnInstallSdk.Enabled = false;
+            _pbarSdk.Value = 0;
+            _pbarSdk.Visible = true;
+            try
+            {
+                string installer = SdkInstaller.InstallerPath();
+                if (!File.Exists(installer))
+                {
+                    _logger.Log("[SDK] 下载微软官方 Windows SDK 安装器（SigningTools 组件含 Inf2Cat/Signtool）…");
+                    _logger.Log("[SDK] 直链：" + SdkInstaller.DownloadUrl);
+                    bool dl = await DownloadSdkInstaller();
+                    if (!dl) return; // 下载失败已弹官方下载页
+                    _logger.Log("[SDK] 下载完成：" + installer + "（" + new FileInfo(installer).Length + " B）");
+                }
+                else
+                {
+                    _logger.Log("[SDK] 复用已下载的官方安装器：" + installer);
+                }
+
+                _logger.Log("[SDK] 静默安装：winsdksetup.exe " + SdkInstaller.SilentArgs());
+                ProcResult r = await Task.Run(delegate { return Proc.Run(installer, SdkInstaller.SilentArgs(), 1800000); });
+                _logger.Log("[SDK] 静默安装退出码 " + r.ExitCode + "\r\n" + Indent(r.Output));
+
+                _inf2catPath = Inf2CatLocator.Find();
+                if (r.ExitCode != 0 || _inf2catPath == null)
+                {
+                    if (r.ExitCode != 0)
+                        _logger.Log("[SDK] 静默安装非零退出码（输出原样见上）——自动转图形界面安装。");
+                    else
+                        _logger.Log("[SDK] 静默安装完成但未探测到 inf2cat——自动转图形界面安装（可在安装器中勾选组件）。");
+                    OpenSdkGui(installer);
+                    return;
+                }
+                _logger.Log("[SDK] inf2cat 已就绪：" + _inf2catPath);
+            }
+            finally
+            {
+                _pbarSdk.Visible = false;
+                _btnInstallSdk.Enabled = true;
+                _installing = false;
+                _lblRecommend.Text = ComputeRecommendation();
+                UpdateRouteUi();
+            }
+        }
+
+        // 官方安装器下载（HttpClient 流式下载 + 进度上报）
+        private async Task<bool> DownloadSdkInstaller()
+        {
+            string dst = SdkInstaller.InstallerPath();
+            try
+            {
+                try { ServicePointManager.SecurityProtocol |= (SecurityProtocolType)3072; } catch { } // TLS 1.2
+                using (HttpClient client = new HttpClient())
+                {
+                    client.Timeout = TimeSpan.FromMinutes(30);
+                    using (HttpResponseMessage resp = await client.GetAsync(SdkInstaller.DownloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        resp.EnsureSuccessStatusCode();
+                        long? total = resp.Content.Headers.ContentLength;
+                        using (Stream src = await resp.Content.ReadAsStreamAsync())
+                        using (FileStream fs = new FileStream(dst, FileMode.Create, FileAccess.Write))
+                        {
+                            byte[] buf = new byte[81920];
+                            long readBytes = 0;
+                            int lastPct = -1;
+                            while (true)
+                            {
+                                int n = await src.ReadAsync(buf, 0, buf.Length);
+                                if (n <= 0) break;
+                                await fs.WriteAsync(buf, 0, n);
+                                readBytes += n;
+                                if (total.HasValue && total.Value > 0)
+                                {
+                                    int pct = (int)(readBytes * 100 / total.Value);
+                                    if (pct != lastPct) { lastPct = pct; ReportSdkProgress(pct); }
+                                }
+                            }
+                            ReportSdkProgress(100);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log("[SDK][下载失败] " + ex.Message + " —— 已打开官方下载页，请手动获取安装器并运行其图形安装，再点「重新检测 Inf2Cat」。");
+                try { Process.Start(SdkInstaller.OfficialPageUrl); } catch { }
+                return false;
+            }
+        }
+
+        private void ReportSdkProgress(int pct)
+        {
+            try
+            {
+                if (_pbarSdk.IsHandleCreated && !_pbarSdk.IsDisposed)
+                    _pbarSdk.BeginInvoke(new Action(delegate { _pbarSdk.Value = pct; }));
+            }
+            catch { }
+            if (pct == 25 || pct == 50 || pct == 75 || pct == 100)
+                _logger.Log("[SDK] 下载进度 " + pct + "%");
+        }
+
+        // 静默失败/探测仍失败 → 打开 SDK 安装器图形界面，用户手动完成后点「重新检测 Inf2Cat」
+        private void OpenSdkGui(string installer)
+        {
+            try
+            {
+                Process.Start(installer); // GUI 模式（无 /q）
+                _logger.Log("[SDK] 已打开 SDK 安装器图形界面——请在安装器中完成安装（可勾选组件），装完点「重新检测 Inf2Cat」。");
+                MessageBox.Show("已打开 SDK 安装器图形界面。\r\n请在安装器中完成安装（组件可勾选），完成后回到本窗口点「重新检测 Inf2Cat」。",
+                    "请手动完成安装", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log("[SDK] 打开图形安装器失败：" + ex.Message);
+                MessageBox.Show("打开 SDK 安装器失败：" + ex.Message + "\r\n请从官方下载页手动获取安装器：\r\n" + SdkInstaller.OfficialPageUrl,
+                    "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // ------------------------------------------------------------------
+        // 开始安装：按路线分派
         // ------------------------------------------------------------------
         private async void _btnInstall_Click(object sender, EventArgs e)
         {
             if (_installing) return;
 
-            int route = _chkAdvanced.Checked ? -1 : CurrentRoute();
+            int route = CurrentRoute();
             bool netMode = _rbNet.Checked;
             bool usbMode = _rbUsb.Checked;
             bool driverOnly = _rbDriverOnly.Checked;
@@ -1688,25 +1761,19 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             string ip = _txtIp.Text.Trim();
             string queueName = _txtQueue.Text.Trim();
 
-            // 参数校验（路线3 由 IPP 流程自行校验；v1 直装链沿用 v1 校验）
-            if (route <= 1 && !driverOnly && string.IsNullOrEmpty(model))
+            // 参数校验（IPP 路线由其流程自行校验）
+            if (route == 0 && !driverOnly && string.IsNullOrEmpty(model))
             {
-                MessageBox.Show("请先选择 INF 型号名。\r\n若列表为空，请确认 exe 同目录 driver\\（路线1）或 v3pkg\\（路线2）存在。",
+                MessageBox.Show("请先选择 INF 型号名。\r\n若列表为空，请确认 exe 同目录 driver\\ 存在（LJ2400WOA.INF）。",
                     "缺少参数", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (route != 2 && !driverOnly && string.IsNullOrEmpty(queueName))
+            if (route == 0 && !driverOnly && string.IsNullOrEmpty(queueName))
             {
                 MessageBox.Show("请填写打印队列名称。", "缺少参数", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (route == 1 && driverOnly)
-            {
-                MessageBox.Show("路线2（v3）需要建队列（printui /if）。「仅安装驱动」请勾选 v1 直装链（高级选项）或改走路线1。",
-                    "参数冲突", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (route != 2 && netMode && !IsValidHost(ip))
+            if (route == 0 && netMode && !IsValidHost(ip))
             {
                 MessageBox.Show("请填写合法的打印机 IP（如 192.168.1.100）或主机名。", "缺少参数",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1716,23 +1783,15 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             _installing = true;
             _btnInstall.Enabled = false;
             _btnOpenManager.Enabled = false;
-            _logger.Log("==== 开始安装（" + (route == -1 ? "高级选项：v1 直装链" : "路线" + (route + 1)) +
+            _logger.Log("==== 开始安装（" + (route == 0 ? "签名安装路线" : "IPP 路线（基础打印）") +
                 "，模式：" + (driverOnly ? "仅驱动" : usbMode ? "USB" : "网络") + "）====");
 
             bool ok = false;
             try
             {
-                if (route == -1)
+                if (route == 0)
                 {
-                    ok = await DoInstall(model, queueName, ip, netMode, usbMode, driverOnly);
-                }
-                else if (route == 0)
-                {
-                    ok = await RunRouteV4Signed(model, queueName, ip, netMode, usbMode);
-                }
-                else if (route == 1)
-                {
-                    ok = await RunRouteV3(model, queueName, ip, netMode, usbMode);
+                    ok = await RunRouteSigned(model, queueName, ip, netMode, usbMode);
                 }
                 else
                 {
@@ -1749,7 +1808,7 @@ Write-Output ('SIGN_OK ' + $s.Status)";
 
             _installing = false;
             _btnInstall.Enabled = true;
-            if (ok && route != 0) // 路线1 成功时是「等待重启」提示框，不重复弹完成框
+            if (ok && route != 0) // 签名安装路线成功时是「等待重启」提示框，不重复弹完成框
             {
                 _btnOpenManager.Enabled = File.Exists(Path.Combine(_workRoot, "LJ2400Manager.exe"));
                 _logger.Log("==== 安装完成 ====");
@@ -1759,77 +1818,23 @@ Write-Output ('SIGN_OK ' + $s.Status)";
             else if (!ok)
             {
                 MessageBox.Show("安装未全部成功。\r\n可操作提示：USB 模式请确认打印机已开机插线；网络模式确认 IP 可达（ping 通）；" +
-                    "\r\n路线1 失败先确认 inf2cat/签名步骤输出。\r\n详细日志：\r\n" + _logger.LogPath,
+                    "\r\n签名安装路线失败先确认 inf2cat/签名步骤输出。\r\n详细日志：\r\n" + _logger.LogPath,
                     "安装未完成", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         // ------------------------------------------------------------------
-        // 高级选项：v1 直装链（pnputil 预装 → printui 建队列 → 验证 → 管理工具）
+        // 签名安装路线续装的 printui 降级建队列（Add-Printer 失败时的备用路径）
         // ------------------------------------------------------------------
-        private async Task<bool> DoInstall(string model, string queueName, string ip, bool netMode, bool usbMode, bool driverOnly)
+        private bool RunPrintuiInstall(string queueName, string infPath, string port, string model)
         {
-            _logger.Log("[高级] 步骤1：复制驱动包 driver\\ → " + _driverDstDir);
-            CopyDriverPackage();
-            string infSrc = Path.Combine(_driverSrcDir, Program.InfFileName);
-            if (!File.Exists(infSrc))
-                throw new FileNotFoundException(
-                    "驱动包缺少 " + Program.InfFileName + "。请将 driver\\ 子目录放到 " + _baseDir, Program.InfFileName);
-
-            foreach (string m in ParseInfModelNames(_infDstPath))
-            {
-                if (!_cboModel.Items.Contains(m))
-                {
-                    _cboModel.Items.Add(m);
-                    _logger.Log("[高级] INF 解析出常量表之外的型号，已追加：" + m);
-                }
-            }
-
-            _logger.Log("[高级] 步骤2：pnputil /add-driver " + infSrc + " /install");
-            ProcResult pnputil = await Task.Run(delegate { return Proc.Run("pnputil.exe", "/add-driver \"" + infSrc + "\" /install", 120000); });
-            _logger.Log("[高级] pnputil 退出码 " + pnputil.ExitCode + "，输出：\r\n" + Indent(pnputil.Output));
-            bool pnputilOk = PnputilLooksOk(pnputil);
-            if (!pnputilOk)
-            {
-                _logger.Log("[高级] pnputil 失败或被拒（未签名 v4 包实测为 0xBCB），记录并降级 printui。");
-                if (driverOnly)
-                {
-                    _logger.Log("[高级] 「仅安装驱动」模式下 pnputil 是唯一安装途径。手动补救命令：");
-                    _logger.Log("    rundll32 printui.dll,PrintUIEntry /if /b \"" + (queueName ?? model ?? "Lenovo LJ2400") +
-                        "\" /f \"" + _infDstPath + "\" /r \"FILE:\" /m \"" + (model ?? "<INF型号名>") + "\"");
-                    _logger.Log("    （信任框点「仍要安装此驱动程序软件」；或改走路线1 签名后免信任安装）");
-                    return false;
-                }
-            }
-
-            if (!driverOnly)
-            {
-                string port = await ResolvePort(netMode, ip);
-                _logger.Log("[高级] 步骤3：创建打印队列：" + queueName + "（端口 " + port + "，型号 " + model + "）");
-                bool printuiOk = await Task.Run(delegate { return RunPrintuiInstall(queueName, _infDstPath, port, model); });
-
-                _logger.Log("[高级] 步骤4：验证队列（winspool OpenPrinter/GetPrinter）...");
-                WinspoolNative.PRINTER_INFO_2? info = WinspoolNative.GetPrinterInfo2(queueName);
-                if (!info.HasValue)
-                {
-                    _logger.Log("[高级] 队列不存在——printui 退出码 " + (printuiOk ? "0" : "非0") +
-                        "。常见原因：信任框被取消 / 型号名与 INF 不一致。");
-                    return false;
-                }
-                string drv = info.Value.pDriverName;
-                _logger.Log("[高级] 队列已建：驱动名=\"" + drv + "\"，端口=" + info.Value.pPortName + "，状态位=0x" +
-                    info.Value.Status.ToString("X8"));
-                if (!string.Equals(drv, model, StringComparison.OrdinalIgnoreCase))
-                {
-                    _logger.Log("[高级] 驱动名与所选型号不一致（期望 \"" + model + "\"）——请检查 INF 型号名。");
-                    return false;
-                }
-                _logger.Log("[高级] 验证通过：DriverName 匹配。");
-            }
-
-            _logger.Log("[高级] 步骤5：安装管理工具与快捷方式");
-            InstallManagerAndShortcuts();
-            return driverOnly ? pnputilOk : true;
+            string args = "/if /b \"" + queueName + "\" /f \"" + infPath + "\" /r \"" + port + "\" /m \"" + model + "\"";
+            _logger.Log("命令：rundll32 printui.dll,PrintUIEntry " + args);
+            ProcResult r = Proc.Run("rundll32.exe", "printui.dll,PrintUIEntry " + args, 600000);
+            _logger.Log("printui 退出码 " + r.ExitCode +
+                (r.ExitCode == 0 ? "（成功）" : "（失败——若弹出信任框请点「仍要安装此驱动程序软件」后重试）"));
+            if ((r.Output ?? "").Trim().Length > 0) _logger.Log(Indent(r.Output));
+            return r.ExitCode == 0;
         }
 
         // 端口决策：网络 → TCP/IP 端口（RAW 9100）；USB → 现有 USB 端口或 USB001 尝试
@@ -1867,23 +1872,12 @@ Write-Output ('SIGN_OK ' + $s.Status)";
         {
             if (r.ExitCode != 0) return false;
             string outLower = (r.Output ?? "").ToLowerInvariant();
-            if (Regex.IsMatch(r.Output ?? "", @"0x8[0-9a-fA-F]{7}")) return false; // HRESULT 错误码（未签名 v4 实测 0xBCB）
+            if (Regex.IsMatch(r.Output ?? "", @"0x8[0-9a-fA-F]{7}")) return false; // HRESULT 错误码（未签名驱动包实测 0xBCB）
             if ((r.Output ?? "").Contains("拒绝")) return false;
             if ((r.Output ?? "").Contains("失败")) return false;
             if ((r.Output ?? "").Contains("无法")) return false;
             if (outLower.Contains("error") || outLower.Contains("failed")) return false;
             return true;
-        }
-
-        private bool RunPrintuiInstall(string queueName, string infPath, string port, string model)
-        {
-            string args = "/if /b \"" + queueName + "\" /f \"" + infPath + "\" /r \"" + port + "\" /m \"" + model + "\"";
-            _logger.Log("命令：rundll32 printui.dll,PrintUIEntry " + args);
-            ProcResult r = Proc.Run("rundll32.exe", "printui.dll,PrintUIEntry " + args, 600000);
-            _logger.Log("printui 退出码 " + r.ExitCode +
-                (r.ExitCode == 0 ? "（成功）" : "（失败——若弹出信任框请点「仍要安装此驱动程序软件」后重试）"));
-            if ((r.Output ?? "").Trim().Length > 0) _logger.Log(Indent(r.Output));
-            return r.ExitCode == 0;
         }
 
         private async Task<string> EnsureTcpIpPort(string ip)
