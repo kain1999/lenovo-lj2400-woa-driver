@@ -1,0 +1,4560 @@
+[
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2400Pro-cups-en.ppd",
+  "size": 14218,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2400 Pro)",
+  "ModelName": "LJ2400 Pro",
+  "NickName": "Lenovo LJ2400 Pro for CUPS ",
+  "ShortNickName": "Lenovo LJ2400 Pro",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2400Pro",
+   "application/vnd.cups-pdf 0 lenovo_LJ2400Pro"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2405-cups-en.ppd",
+  "size": 14189,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2405)",
+  "ModelName": "LJ2405",
+  "NickName": "Lenovo LJ2405 for CUPS ",
+  "ShortNickName": "Lenovo LJ2405",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2405",
+   "application/vnd.cups-pdf 0 lenovo_LJ2405"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2405D-cups-en.ppd",
+  "size": 14926,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2405D)",
+  "ModelName": "LJ2405D",
+  "NickName": "Lenovo LJ2405D for CUPS ",
+  "ShortNickName": "Lenovo LJ2405D",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2405D",
+   "application/vnd.cups-pdf 0 lenovo_LJ2405D"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2605D-cups-en.ppd",
+  "size": 14926,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2605D)",
+  "ModelName": "LJ2605D",
+  "NickName": "Lenovo LJ2605D for CUPS ",
+  "ShortNickName": "Lenovo LJ2605D",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2605D",
+   "application/vnd.cups-pdf 0 lenovo_LJ2605D"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2655DN-cups-en.ppd",
+  "size": 17661,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "ENAHQ1200ADTMSLEEPEND",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2655DN series)",
+  "ModelName": "LJ2655DN",
+  "NickName": "Lenovo LJ2655DN for CUPS ",
+  "ShortNickName": "Lenovo LJ2655DN",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2655DN",
+   "application/vnd.cups-pdf 0 lenovo_LJ2655DN"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1 *PageSize Custom",
+   "*InputSlot TRAY1 *PageSize CUSTOM1",
+   "*InputSlot TRAY1 *PageSize CUSTOM2",
+   "*InputSlot TRAY1 *PageSize CUSTOM3",
+   "*Duplex DuplexTumble *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize Executive",
+   "*Duplex DuplexNoTumble *PageSize A5",
+   "*Duplex DuplexNoTumble *PageSize A6",
+   "*Duplex DuplexNoTumble *PageSize Env10",
+   "*Duplex DuplexNoTumble *PageSize EnvMonarch",
+   "*Duplex DuplexNoTumble *PageSize EnvDL",
+   "*Duplex DuplexNoTumble *PageSize EnvC5",
+   "*Duplex DuplexNoTumble *PageSize ISOB5",
+   "*Duplex DuplexNoTumble *PageSize B5",
+   "*Duplex DuplexNoTumble *PageSize ISOB6",
+   "*Duplex DuplexNoTumble *PageSize B6",
+   "*Duplex DuplexNoTumble *PageSize 4x6",
+   "*Duplex DuplexNoTumble *PageSize Postcard",
+   "*Duplex DuplexNoTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexNoTumble *PageSize EnvYou4",
+   "*Duplex DuplexNoTumble *PageSize 195x270mm",
+   "*Duplex DuplexNoTumble *PageSize 184x260mm",
+   "*Duplex DuplexNoTumble *PageSize 197x273mm",
+   "*Duplex DuplexTumble *PageSize Executive",
+   "*Duplex DuplexTumble *PageSize A5",
+   "*Duplex DuplexTumble *PageSize A6",
+   "*Duplex DuplexTumble *PageSize Env10",
+   "*Duplex DuplexTumble *PageSize EnvMonarch",
+   "*Duplex DuplexTumble *PageSize EnvDL",
+   "*Duplex DuplexTumble *PageSize EnvC5",
+   "*Duplex DuplexTumble *PageSize ISOB5",
+   "*Duplex DuplexTumble *PageSize B5",
+   "*Duplex DuplexTumble *PageSize ISOB6",
+   "*Duplex DuplexTumble *PageSize B6",
+   "*Duplex DuplexTumble *PageSize 4x6",
+   "*Duplex DuplexTumble *PageSize Postcard",
+   "*Duplex DuplexTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexTumble *PageSize EnvYou4",
+   "*Duplex DuplexTumble *PageSize 195x270mm",
+   "*Duplex DuplexTumble *PageSize 184x260mm",
+   "*Duplex DuplexTumble *PageSize 197x273mm",
+   "*Duplex DuplexNoTumble *BrMediaType THICK",
+   "*Duplex DuplexNoTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexNoTumble *BrMediaType BOND",
+   "*Duplex DuplexNoTumble *BrMediaType ENV",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHIN",
+   "*Duplex DuplexTumble *BrMediaType THICK",
+   "*Duplex DuplexTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexTumble *BrMediaType BOND",
+   "*Duplex DuplexTumble *BrMediaType ENV",
+   "*Duplex DuplexTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexTumble *BrMediaType ENVTHIN"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-LJ2680DN-cups-en.ppd",
+  "size": 14934,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo LJ2680DN)",
+  "ModelName": "LJ2680DN",
+  "NickName": "Lenovo LJ2680DN for CUPS ",
+  "ShortNickName": "Lenovo LJ2680DN",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_LJ2680DN",
+   "application/vnd.cups-pdf 0 lenovo_LJ2680DN"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7400Pro-cups-en.ppd",
+  "size": 13838,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7400 Pro)",
+  "ModelName": "M7400 Pro",
+  "NickName": "Lenovo M7400 Pro for CUPS ",
+  "ShortNickName": "Lenovo M7400 Pro",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7400Pro",
+   "application/vnd.cups-pdf 0 lenovo_M7400Pro"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7400W-cups-en.ppd",
+  "size": 13820,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7400W)",
+  "ModelName": "M7400W",
+  "NickName": "Lenovo M7400W for CUPS ",
+  "ShortNickName": "Lenovo M7400W",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7400W",
+   "application/vnd.cups-pdf 0 lenovo_M7400W"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7405D-cups-en.ppd",
+  "size": 14918,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7405D)",
+  "ModelName": "M7405D",
+  "NickName": "Lenovo M7405D for CUPS ",
+  "ShortNickName": "Lenovo M7405D",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7405D",
+   "application/vnd.cups-pdf 0 lenovo_M7405D"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7405DW-cups-en.ppd",
+  "size": 14557,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7405DW)",
+  "ModelName": "M7405DW",
+  "NickName": "Lenovo M7405DW for CUPS ",
+  "ShortNickName": "Lenovo M7405DW",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7405DW",
+   "application/vnd.cups-pdf 0 lenovo_M7405DW"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7450FPro-cups-en.ppd",
+  "size": 13846,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7450F Pro)",
+  "ModelName": "M7450F Pro",
+  "NickName": "Lenovo M7450F Pro for CUPS ",
+  "ShortNickName": "Lenovo M7450F Pro",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7450FPro",
+   "application/vnd.cups-pdf 0 lenovo_M7450FPro"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7455DNF-cups-en.ppd",
+  "size": 17287,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "ENAHQ1200ADTMSCANEND",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7455DNF series)",
+  "ModelName": "M7455DNF",
+  "NickName": "Lenovo M7455DNF for CUPS ",
+  "ShortNickName": "Lenovo M7455DNF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7455DNF",
+   "application/vnd.cups-pdf 0 lenovo_M7455DNF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1 *PageSize Custom",
+   "*InputSlot TRAY1 *PageSize CUSTOM1",
+   "*InputSlot TRAY1 *PageSize CUSTOM2",
+   "*InputSlot TRAY1 *PageSize CUSTOM3",
+   "*Duplex DuplexTumble *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize Executive",
+   "*Duplex DuplexNoTumble *PageSize A5",
+   "*Duplex DuplexNoTumble *PageSize A6",
+   "*Duplex DuplexNoTumble *PageSize Env10",
+   "*Duplex DuplexNoTumble *PageSize EnvMonarch",
+   "*Duplex DuplexNoTumble *PageSize EnvDL",
+   "*Duplex DuplexNoTumble *PageSize EnvC5",
+   "*Duplex DuplexNoTumble *PageSize ISOB5",
+   "*Duplex DuplexNoTumble *PageSize B5",
+   "*Duplex DuplexNoTumble *PageSize ISOB6",
+   "*Duplex DuplexNoTumble *PageSize B6",
+   "*Duplex DuplexNoTumble *PageSize 4x6",
+   "*Duplex DuplexNoTumble *PageSize Postcard",
+   "*Duplex DuplexNoTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexNoTumble *PageSize EnvYou4",
+   "*Duplex DuplexNoTumble *PageSize 195x270mm",
+   "*Duplex DuplexNoTumble *PageSize 184x260mm",
+   "*Duplex DuplexNoTumble *PageSize 197x273mm",
+   "*Duplex DuplexTumble *PageSize Executive",
+   "*Duplex DuplexTumble *PageSize A5",
+   "*Duplex DuplexTumble *PageSize A6",
+   "*Duplex DuplexTumble *PageSize Env10",
+   "*Duplex DuplexTumble *PageSize EnvMonarch",
+   "*Duplex DuplexTumble *PageSize EnvDL",
+   "*Duplex DuplexTumble *PageSize EnvC5",
+   "*Duplex DuplexTumble *PageSize ISOB5",
+   "*Duplex DuplexTumble *PageSize B5",
+   "*Duplex DuplexTumble *PageSize ISOB6",
+   "*Duplex DuplexTumble *PageSize B6",
+   "*Duplex DuplexTumble *PageSize 4x6",
+   "*Duplex DuplexTumble *PageSize Postcard",
+   "*Duplex DuplexTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexTumble *PageSize EnvYou4",
+   "*Duplex DuplexTumble *PageSize 195x270mm",
+   "*Duplex DuplexTumble *PageSize 184x260mm",
+   "*Duplex DuplexTumble *PageSize 197x273mm",
+   "*Duplex DuplexNoTumble *BrMediaType THICK",
+   "*Duplex DuplexNoTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexNoTumble *BrMediaType BOND",
+   "*Duplex DuplexNoTumble *BrMediaType ENV",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHIN",
+   "*Duplex DuplexTumble *BrMediaType THICK",
+   "*Duplex DuplexTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexTumble *BrMediaType BOND",
+   "*Duplex DuplexTumble *BrMediaType ENV",
+   "*Duplex DuplexTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexTumble *BrMediaType ENVTHIN"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7460-cups-en.ppd",
+  "size": 13809,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7460)",
+  "ModelName": "M7460",
+  "NickName": "Lenovo M7460 for CUPS ",
+  "ShortNickName": "Lenovo M7460",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7460",
+   "application/vnd.cups-pdf 0 lenovo_M7460"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7480-cups-en.ppd",
+  "size": 13809,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "NTM24",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7480)",
+  "ModelName": "M7480",
+  "NickName": "Lenovo M7480 for CUPS ",
+  "ShortNickName": "Lenovo M7480",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7480",
+   "application/vnd.cups-pdf 0 lenovo_M7480"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [],
+  "DefaultDuplex": null,
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7490DNF-cups-en.ppd",
+  "size": 14934,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7490DNF)",
+  "ModelName": "M7490DNF",
+  "NickName": "Lenovo M7490DNF for CUPS ",
+  "ShortNickName": "Lenovo M7490DNF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7490DNF",
+   "application/vnd.cups-pdf 0 lenovo_M7490DNF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7605D-cups-en.ppd",
+  "size": 14918,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7605D)",
+  "ModelName": "M7605D",
+  "NickName": "Lenovo M7605D for CUPS ",
+  "ShortNickName": "Lenovo M7605D",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7605D",
+   "application/vnd.cups-pdf 0 lenovo_M7605D"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7605DW-cups-en.ppd",
+  "size": 14557,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7605DW)",
+  "ModelName": "M7605DW",
+  "NickName": "Lenovo M7605DW for CUPS ",
+  "ShortNickName": "Lenovo M7605DW",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7605DW",
+   "application/vnd.cups-pdf 0 lenovo_M7605DW"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7615DNA-cups-en.ppd",
+  "size": 17287,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "ENAHQ1200ADTMSCANEND",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7615DNA series)",
+  "ModelName": "M7615DNA",
+  "NickName": "Lenovo M7615DNA for CUPS ",
+  "ShortNickName": "Lenovo M7615DNA",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7615DNA",
+   "application/vnd.cups-pdf 0 lenovo_M7615DNA"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1 *PageSize Custom",
+   "*InputSlot TRAY1 *PageSize CUSTOM1",
+   "*InputSlot TRAY1 *PageSize CUSTOM2",
+   "*InputSlot TRAY1 *PageSize CUSTOM3",
+   "*Duplex DuplexTumble *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize Executive",
+   "*Duplex DuplexNoTumble *PageSize A5",
+   "*Duplex DuplexNoTumble *PageSize A6",
+   "*Duplex DuplexNoTumble *PageSize Env10",
+   "*Duplex DuplexNoTumble *PageSize EnvMonarch",
+   "*Duplex DuplexNoTumble *PageSize EnvDL",
+   "*Duplex DuplexNoTumble *PageSize EnvC5",
+   "*Duplex DuplexNoTumble *PageSize ISOB5",
+   "*Duplex DuplexNoTumble *PageSize B5",
+   "*Duplex DuplexNoTumble *PageSize ISOB6",
+   "*Duplex DuplexNoTumble *PageSize B6",
+   "*Duplex DuplexNoTumble *PageSize 4x6",
+   "*Duplex DuplexNoTumble *PageSize Postcard",
+   "*Duplex DuplexNoTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexNoTumble *PageSize EnvYou4",
+   "*Duplex DuplexNoTumble *PageSize 195x270mm",
+   "*Duplex DuplexNoTumble *PageSize 184x260mm",
+   "*Duplex DuplexNoTumble *PageSize 197x273mm",
+   "*Duplex DuplexTumble *PageSize Executive",
+   "*Duplex DuplexTumble *PageSize A5",
+   "*Duplex DuplexTumble *PageSize A6",
+   "*Duplex DuplexTumble *PageSize Env10",
+   "*Duplex DuplexTumble *PageSize EnvMonarch",
+   "*Duplex DuplexTumble *PageSize EnvDL",
+   "*Duplex DuplexTumble *PageSize EnvC5",
+   "*Duplex DuplexTumble *PageSize ISOB5",
+   "*Duplex DuplexTumble *PageSize B5",
+   "*Duplex DuplexTumble *PageSize ISOB6",
+   "*Duplex DuplexTumble *PageSize B6",
+   "*Duplex DuplexTumble *PageSize 4x6",
+   "*Duplex DuplexTumble *PageSize Postcard",
+   "*Duplex DuplexTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexTumble *PageSize EnvYou4",
+   "*Duplex DuplexTumble *PageSize 195x270mm",
+   "*Duplex DuplexTumble *PageSize 184x260mm",
+   "*Duplex DuplexTumble *PageSize 197x273mm",
+   "*Duplex DuplexNoTumble *BrMediaType THICK",
+   "*Duplex DuplexNoTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexNoTumble *BrMediaType BOND",
+   "*Duplex DuplexNoTumble *BrMediaType ENV",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHIN",
+   "*Duplex DuplexTumble *BrMediaType THICK",
+   "*Duplex DuplexTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexTumble *BrMediaType BOND",
+   "*Duplex DuplexTumble *BrMediaType ENV",
+   "*Duplex DuplexTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexTumble *BrMediaType ENVTHIN"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7625DWA-cups-en.ppd",
+  "size": 14565,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7625DWA)",
+  "ModelName": "M7625DWA",
+  "NickName": "Lenovo M7625DWA for CUPS ",
+  "ShortNickName": "Lenovo M7625DWA",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7625DWA",
+   "application/vnd.cups-pdf 0 lenovo_M7625DWA"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7626DNA-cups-en.ppd",
+  "size": 14565,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7626DNA)",
+  "ModelName": "M7626DNA",
+  "NickName": "Lenovo M7626DNA for CUPS ",
+  "ShortNickName": "Lenovo M7626DNA",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7626DNA",
+   "application/vnd.cups-pdf 0 lenovo_M7626DNA"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7628DNA-cups-en.ppd",
+  "size": 14565,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7628DNA)",
+  "ModelName": "M7628DNA",
+  "NickName": "Lenovo M7628DNA for CUPS ",
+  "ShortNickName": "Lenovo M7628DNA",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7628DNA",
+   "application/vnd.cups-pdf 0 lenovo_M7628DNA"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7655DHF-cups-en.ppd",
+  "size": 14934,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7655DHF)",
+  "ModelName": "M7655DHF",
+  "NickName": "Lenovo M7655DHF for CUPS ",
+  "ShortNickName": "Lenovo M7655DHF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7655DHF",
+   "application/vnd.cups-pdf 0 lenovo_M7655DHF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7675DXF-cups-en.ppd",
+  "size": 17287,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "ENAHQ1200ADTMSCANEND",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7675DXF series)",
+  "ModelName": "M7675DXF",
+  "NickName": "Lenovo M7675DXF for CUPS ",
+  "ShortNickName": "Lenovo M7675DXF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7675DXF",
+   "application/vnd.cups-pdf 0 lenovo_M7675DXF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1 *PageSize Custom",
+   "*InputSlot TRAY1 *PageSize CUSTOM1",
+   "*InputSlot TRAY1 *PageSize CUSTOM2",
+   "*InputSlot TRAY1 *PageSize CUSTOM3",
+   "*Duplex DuplexTumble *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize Executive",
+   "*Duplex DuplexNoTumble *PageSize A5",
+   "*Duplex DuplexNoTumble *PageSize A6",
+   "*Duplex DuplexNoTumble *PageSize Env10",
+   "*Duplex DuplexNoTumble *PageSize EnvMonarch",
+   "*Duplex DuplexNoTumble *PageSize EnvDL",
+   "*Duplex DuplexNoTumble *PageSize EnvC5",
+   "*Duplex DuplexNoTumble *PageSize ISOB5",
+   "*Duplex DuplexNoTumble *PageSize B5",
+   "*Duplex DuplexNoTumble *PageSize ISOB6",
+   "*Duplex DuplexNoTumble *PageSize B6",
+   "*Duplex DuplexNoTumble *PageSize 4x6",
+   "*Duplex DuplexNoTumble *PageSize Postcard",
+   "*Duplex DuplexNoTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexNoTumble *PageSize EnvYou4",
+   "*Duplex DuplexNoTumble *PageSize 195x270mm",
+   "*Duplex DuplexNoTumble *PageSize 184x260mm",
+   "*Duplex DuplexNoTumble *PageSize 197x273mm",
+   "*Duplex DuplexTumble *PageSize Executive",
+   "*Duplex DuplexTumble *PageSize A5",
+   "*Duplex DuplexTumble *PageSize A6",
+   "*Duplex DuplexTumble *PageSize Env10",
+   "*Duplex DuplexTumble *PageSize EnvMonarch",
+   "*Duplex DuplexTumble *PageSize EnvDL",
+   "*Duplex DuplexTumble *PageSize EnvC5",
+   "*Duplex DuplexTumble *PageSize ISOB5",
+   "*Duplex DuplexTumble *PageSize B5",
+   "*Duplex DuplexTumble *PageSize ISOB6",
+   "*Duplex DuplexTumble *PageSize B6",
+   "*Duplex DuplexTumble *PageSize 4x6",
+   "*Duplex DuplexTumble *PageSize Postcard",
+   "*Duplex DuplexTumble *PageSize DoublePostcardRotated",
+   "*Duplex DuplexTumble *PageSize EnvYou4",
+   "*Duplex DuplexTumble *PageSize 195x270mm",
+   "*Duplex DuplexTumble *PageSize 184x260mm",
+   "*Duplex DuplexTumble *PageSize 197x273mm",
+   "*Duplex DuplexNoTumble *BrMediaType THICK",
+   "*Duplex DuplexNoTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexNoTumble *BrMediaType BOND",
+   "*Duplex DuplexNoTumble *BrMediaType ENV",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexNoTumble *BrMediaType ENVTHIN",
+   "*Duplex DuplexTumble *BrMediaType THICK",
+   "*Duplex DuplexTumble *BrMediaType THICKERPAPER2",
+   "*Duplex DuplexTumble *BrMediaType BOND",
+   "*Duplex DuplexTumble *BrMediaType ENV",
+   "*Duplex DuplexTumble *BrMediaType ENVTHICK",
+   "*Duplex DuplexTumble *BrMediaType ENVTHIN"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7680D-cups-en.ppd",
+  "size": 14918,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7680D)",
+  "ModelName": "M7680D",
+  "NickName": "Lenovo M7680D for CUPS ",
+  "ShortNickName": "Lenovo M7680D",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7680D",
+   "application/vnd.cups-pdf 0 lenovo_M7680D"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7685DXF-cups-en.ppd",
+  "size": 14565,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7685DXF)",
+  "ModelName": "M7685DXF",
+  "NickName": "Lenovo M7685DXF for CUPS ",
+  "ShortNickName": "Lenovo M7685DXF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7685DXF",
+   "application/vnd.cups-pdf 0 lenovo_M7685DXF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7686DXF-cups-en.ppd",
+  "size": 14565,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7686DXF)",
+  "ModelName": "M7686DXF",
+  "NickName": "Lenovo M7686DXF for CUPS ",
+  "ShortNickName": "Lenovo M7686DXF",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7686DXF",
+   "application/vnd.cups-pdf 0 lenovo_M7686DXF"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ },
+ {
+  "file": "._usr_share_cups_model_lenovo_lenovo-M7690DNA-cups-en.ppd",
+  "size": 14934,
+  "BrCustomPaperSize": "TRUE",
+  "BrPrinterType": "DTM",
+  "Manufacturer": "Lenovo",
+  "Product": "(Lenovo M7690DNA)",
+  "ModelName": "M7690DNA",
+  "NickName": "Lenovo M7690DNA for CUPS ",
+  "ShortNickName": "Lenovo M7690DNA",
+  "ColorDevice": "False",
+  "DefaultColorSpace": "Gray",
+  "LanguageLevel": "3",
+  "PSVersion": "(3010.106) 3",
+  "Throughput": "18",
+  "VariablePaperSize": "True",
+  "MaxMediaWidth": "612",
+  "MaxMediaHeight": "1008",
+  "cupsVersion": "1.1",
+  "cupsModelNumber": "72",
+  "cupsManualCopies": "True",
+  "FileVersion": "1.00",
+  "cupsFilter": [
+   "application/vnd.cups-postscript 0 lenovo_M7690DNA",
+   "application/vnd.cups-pdf 0 lenovo_M7690DNA"
+  ],
+  "JCL": {},
+  "PJL_hits": [],
+  "OpenUI": [
+   {
+    "name": "*PageSize",
+    "trans": "纸张大小",
+    "type": "PickOne"
+   },
+   {
+    "name": "*BrMediaType",
+    "trans": "介质类型",
+    "type": "PickOne"
+   },
+   {
+    "name": "*InputSlot",
+    "trans": "纸张来源",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Duplex",
+    "trans": "双面打印设置",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Resolution",
+    "trans": "分辨率",
+    "type": "PickOne"
+   },
+   {
+    "name": "*TonerSaveMode",
+    "trans": "省墨模式",
+    "type": "PickOne"
+   },
+   {
+    "name": "*Sleep",
+    "trans": "休眠时间[分]",
+    "type": "PickOne"
+   }
+  ],
+  "Resolution_opts": [
+   "300dpi",
+   "600dpi",
+   "2400x600dpi/HQ1200"
+  ],
+  "DefaultResolution": "600dpi",
+  "Duplex_opts": [
+   "DuplexTumble/短边",
+   "DuplexNoTumble/长边",
+   "None/无"
+  ],
+  "DefaultDuplex": "None",
+  "toner_opts": [
+   {
+    "kw": "TonerSaveMode",
+    "opt": "OFF/关",
+    "cmd": "statusdict begin false tonersave end"
+   },
+   {
+    "kw": "TonerSaveMode",
+    "opt": "ON/开",
+    "cmd": "statusdict begin true tonersave end"
+   },
+   {
+    "kw": "DefaultTonerSaveMode",
+    "opt": "OFF",
+    "cmd": null
+   }
+  ],
+  "Sleep_opts": [
+   {
+    "opt": "PrinterDefault/打印机默认值",
+    "cmd": ""
+   },
+   {
+    "opt": "2minutes/2",
+    "cmd": "statusdict begin 2 powersavetime end"
+   },
+   {
+    "opt": "10minutes/10",
+    "cmd": "statusdict begin 10 powersavetime end"
+   },
+   {
+    "opt": "30minutes/30",
+    "cmd": "statusdict begin 30 powersavetime end"
+   }
+  ],
+  "BrMediaType_opts": [
+   "PLAIN/普通纸",
+   "THIN/薄纸",
+   "THICK/厚纸",
+   "THICKERPAPER2/特厚纸",
+   "BOND/铜版纸",
+   "ENV/信封",
+   "ENVTHICK/厚信封",
+   "ENVTHIN/薄信封",
+   "RECYCLED/再生纸"
+  ],
+  "DefaultBrMediaType": "PLAIN",
+  "InputSlot_opts": [
+   "MANUAL/手动",
+   "TRAY1/纸盒1"
+  ],
+  "DefaultInputSlot": "TRAY1",
+  "PageSize_opts": [
+   "Letter/Letter",
+   "Legal/Legal",
+   "Executive/Executive",
+   "FanFoldGermanLegal/Folio",
+   "A4/A4",
+   "A5/A5",
+   "A6/A6",
+   "Env10/Com-10",
+   "EnvMonarch/Monarch",
+   "EnvDL/DL",
+   "EnvC5/C5",
+   "ISOB5/B5",
+   "ISOB6/B6",
+   "Postcard/明信片",
+   "195x270mm/16K(195x270mm)",
+   "184x260mm/16K(184x260mm)",
+   "197x273mm/16K(197x273mm)",
+   "CUSTOM1/[CUSTOM1]用户自定义尺寸",
+   "CUSTOM2/[CUSTOM2]用户自定义尺寸",
+   "CUSTOM3/[CUSTOM3]用户自定义尺寸"
+  ],
+  "ParamCustomPageSize": [
+   "Width/宽度 3.0-8.5in(76.2-215.9mm)",
+   "Height/高度 5.0-14.0in(127.0-355.6mm)",
+   "Orientation",
+   "WidthOffset",
+   "HeightOffset"
+  ],
+  "UIConstraints": [
+   "*InputSlot TRAY1  *PageSize Custom",
+   "*InputSlot TRAY1  *PageSize CUSTOM1",
+   "*InputSlot TRAY1  *PageSize CUSTOM2",
+   "*InputSlot TRAY1  *PageSize CUSTOM3",
+   "*Duplex DuplexTumble   *PageSize Custom",
+   "*Duplex DuplexNoTumble *PageSize Custom",
+   "*Duplex DuplexTumble   *PageSize CUSTOM1",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM1",
+   "*Duplex DuplexTumble   *PageSize CUSTOM2",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM2",
+   "*Duplex DuplexTumble   *PageSize CUSTOM3",
+   "*Duplex DuplexNoTumble *PageSize CUSTOM3"
+  ],
+  "statusdict_cmds": [
+   "statusdict begin 10 powersavetime end",
+   "statusdict begin 2 powersavetime end",
+   "statusdict begin 30 powersavetime end",
+   "statusdict begin false tonersave end",
+   "statusdict begin true tonersave end"
+  ]
+ }
+]
