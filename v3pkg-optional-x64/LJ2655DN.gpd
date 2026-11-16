@@ -1,0 +1,1477 @@
+*%
+
+*% Copyright (c) 1997 - 1999 Microsoft Corporation
+
+*% All Rights Reserved.
+
+*%
+
+*GPDSpecVersion: "1.0"
+
+*GPDFileName: "LJ2655DN.gpd"
+
+*GPDFileVersion: "1.0"
+
+*Include: "StdNames.gpd"
+
+*ModelName: "Lenovo LJ2655DN"
+
+*MasterUnits: PAIR(720, 216)
+
+*PrinterType: SERIAL
+
+*Feature: Orientation
+
+{
+
+    *rcNameID: =ORIENTATION_DISPLAY
+
+    *DefaultOption: PORTRAIT
+
+    *Option: PORTRAIT
+
+    {
+
+        *rcNameID: =PORTRAIT_DISPLAY
+
+    }
+
+    *Option: LANDSCAPE_CC270
+
+    {
+
+        *rcNameID: =LANDSCAPE_DISPLAY
+
+    }
+
+}
+
+*Feature: InputBin
+
+{
+
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+
+    *DefaultOption: TRACTOR
+
+    *Option: TRACTOR
+
+    {
+
+        *rcNameID: =TRACTOR_DISPLAY
+
+    }
+
+    *Option: MANUAL
+
+    {
+
+        *rcNameID: =MANUAL_FEED_DISPLAY
+
+    }
+
+}
+
+*Feature: Resolution
+{
+    *Name: "Resolution"
+    *DefaultOption: 600dpi
+
+    *Option: 300dpi
+    {
+        *Name: "300dpi"
+
+        *DPI: PAIR(300, 300)
+        *TextDPI: PAIR(300, 300)
+        *SpotDiameter: 100
+
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.6
+
+            *Cmd: "@PJL SET RESOLUTION = 300<0A>@PJL SET RAS1200MODE = OFF<0A>"
+        }
+
+        *% PJL: rawtobr3=38 ?(RESOLUTION = 300)+36 ?(RAS1200MODE = OFF ? 1200 ??); PCL=94 ? *t300R+110 ? &u300D
+
+        *Command: CmdBeginRaster { *Cmd : "<1B>*t300R<1B>&u300D<1B>*r0A<1B>*b0M" }
+
+        *% rawtobr3=106 ? *r0A; ???? NONE *b0M(?? 1030M, brcomp1030 ???)
+
+    }
+
+    *Option: 600dpi
+    {
+        *Name: "600dpi"
+
+        *DPI: PAIR(600, 600)
+        *TextDPI: PAIR(600, 600)
+        *SpotDiameter: 100
+
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.6
+
+            *Cmd: "@PJL SET RESOLUTION = 600<0A>@PJL SET RAS1200MODE = OFF<0A>"
+        }
+
+        *% PJL: rawtobr3=39 ?+36 ?; PCL=95 ? *t600R+112 ? &u600D
+
+        *Command: CmdBeginRaster { *Cmd : "<1B>*t600R<1B>&u600D<1B>*r0A<1B>*b0M" }
+
+        *% rawtobr3=106 ? *r0A; ???? NONE *b0M(?? 1030M, brcomp1030 ???)
+
+    }
+
+    *Option: HQ1200
+    {
+        *Name: "2400x600dpi (HQ1200)"
+
+        *DPI: PAIR(1200, 1200)
+        *TextDPI: PAIR(1200, 1200)
+        *SpotDiameter: 100
+
+        *Command: CmdSelect
+        {
+            *Order: DOC_SETUP.6
+
+            *Cmd: "@PJL SET RESOLUTION = 1200<0A>@PJL SET PAPERFEEDSPEED=HALF<0A>@PJL SET RAS1200MODE = TRUE<0A>"
+        }
+
+        *% PJL: rawtobr3=40 ?(RESOLUTION = 1200\nPAPERFEEDSPEED=HALF ???)+34 ?(RAS1200MODE = TRUE); ????? capability_matrix ?8.5(???? 1200dpi, MEDIUM ??); PCL=97 ? *t1200R+113 ? &u1200D
+
+        *Command: CmdBeginRaster { *Cmd : "<1B>*t1200R<1B>&u1200D<1B>*r0A<1B>*b0M" }
+
+        *% rawtobr3=106 ? *r0A; ???? NONE *b0M(?? 1030M, brcomp1030 ???)
+
+    }
+
+}
+
+*Feature: PaperSize
+
+{
+
+    *Name: "PaperSize"
+
+    *DefaultOption: ISOA4
+
+    *Option: NorthAmericaLetter
+
+    {
+
+        *Name: "Letter"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a2a6d1E"
+
+        }
+
+        *% ???: Letter=2 (rawtobr3 strings=144 ?)
+
+        *PageDimensions: PAIR(10200, 13200)
+
+        *PrintableArea: PAIR(9800, 12800)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: NorthAmericaLegal
+
+    {
+
+        *Name: "Legal"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a3a6d1E"
+
+        }
+
+        *% ???: Legal=3 (rawtobr3 strings=146 ?)
+
+        *PageDimensions: PAIR(10200, 16800)
+
+        *PrintableArea: PAIR(9800, 16400)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: NorthAmericaExecutive
+
+    {
+
+        *Name: "Executive"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a1a6d1E"
+
+        }
+
+        *% ???: Executive=1 (rawtobr3 strings=142 ?)
+
+        *PageDimensions: PAIR(8700, 12600)
+
+        *PrintableArea: PAIR(8300, 12200)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: OtherMetricFolio
+
+    {
+
+        *Name: "Folio"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a100a6d1E"
+
+        }
+
+        *% ???: FanFoldGermanLegal=100 (rawtobr3 strings=140 ?(???? 101, ? strings ??))
+
+        *PageDimensions: PAIR(10200, 15600)
+
+        *PrintableArea: PAIR(9800, 15200)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOA4
+
+    {
+
+        *Name: "A4"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a26a6d1E"
+
+        }
+
+        *% ???: A4=26 (rawtobr3 strings=143 ?)
+
+        *PageDimensions: PAIR(9921, 14031)
+
+        *PrintableArea: PAIR(9521, 13631)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOA5
+
+    {
+
+        *Name: "A5"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a25a6d1E"
+
+        }
+
+        *% ???: A5=25 (rawtobr3 strings=138 ?(???? 37, ? strings ??))
+
+        *PageDimensions: PAIR(6992, 9921)
+
+        *PrintableArea: PAIR(6592, 9521)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOA6
+
+    {
+
+        *Name: "A6"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a24a6d1E"
+
+        }
+
+        *% ???: A6=24 (rawtobr3 strings=133 ?; ? 24=A6 ? LOW ??(HP ??=99))
+
+        *PageDimensions: PAIR(4961, 6992)
+
+        *PrintableArea: PAIR(4561, 6592)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: NorthAmericaNumber10Envelope
+
+    {
+
+        *Name: "Com-10"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a81a6d1E"
+
+        }
+
+        *% ???: Env10=81 (rawtobr3 strings=132 ?)
+
+        *PageDimensions: PAIR(4950, 11400)
+
+        *PrintableArea: PAIR(4550, 11000)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: NorthAmericaMonarchEnvelope
+
+    {
+
+        *Name: "Monarch"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a80a6d1E"
+
+        }
+
+        *% ???: EnvMonarch=80 (rawtobr3 strings=130 ?)
+
+        *PageDimensions: PAIR(4650, 9000)
+
+        *PrintableArea: PAIR(4250, 8600)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISODLEnvelope
+
+    {
+
+        *Name: "DL"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a90a6d1E"
+
+        }
+
+        *% ???: EnvDL=90 (rawtobr3 strings=135 ?)
+
+        *PageDimensions: PAIR(5197, 10394)
+
+        *PrintableArea: PAIR(4797, 9994)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOC5Envelope
+
+    {
+
+        *Name: "C5"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a91a6d1E"
+
+        }
+
+        *% ???: EnvC5=91 (rawtobr3 strings=139 ?)
+
+        *PageDimensions: PAIR(7654, 10819)
+
+        *PrintableArea: PAIR(7254, 10419)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOB5Envelope
+
+    {
+
+        *Name: "B5"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a44a6d1E"
+
+        }
+
+        *% ???: ISOB5=44 (rawtobr3 strings=137 ?; HP PCL5 44=B5(ISO) 176x250, ????)
+
+        *PageDimensions: PAIR(8315, 11811)
+
+        *PrintableArea: PAIR(7915, 11411)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: JISB5
+
+    {
+
+        *Name: "JIS B5"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a45a6d1E"
+
+        }
+
+        *% ???: B5=45 (rawtobr3 strings=141 ?)
+
+        *PageDimensions: PAIR(8598, 12142)
+
+        *PrintableArea: PAIR(8198, 11742)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: ISOB6
+
+    {
+
+        *Name: "B6"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u600D<1B>*c2953X<1B>*c4157Y<1B>*c0P"
+
+        }
+
+        *% ? rawtobr3 ??? ? PCL5 ?????????: 125x176 mm = 2953x4157 ?@600dpi (rawtobr3 ?? ? *c ???????(????))
+
+        *PageDimensions: PAIR(5906, 8315)
+
+        *PrintableArea: PAIR(5506, 7915)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: JISB6
+
+    {
+
+        *Name: "JIS B6"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u600D<1B>*c3024X<1B>*c4299Y<1B>*c0P"
+
+        }
+
+        *% ? rawtobr3 ??? ? PCL5 ?????????: 128x182 mm = 3024x4299 ?@600dpi (???? 46 ? strings ??, ??? ? *c ??)
+
+        *PageDimensions: PAIR(6047, 8598)
+
+        *PrintableArea: PAIR(5647, 8198)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: NorthAmerica4X6
+
+    {
+
+        *Name: "4x6in"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a71a6d1E"
+
+        }
+
+        *% ???: 4x6=71 (rawtobr3 strings=131 ?; 71=4x6 ? LOW ??(?=3x5))
+
+        *PageDimensions: PAIR(4800, 7200)
+
+        *PrintableArea: PAIR(4400, 6800)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: JapanHagakiPostcard
+
+    {
+
+        *Name: "Postcard"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a1024a6d1E"
+
+        }
+
+        *% ???: Postcard=1024 (rawtobr3 strings=136 ?; Brother ???? LOW ??)
+
+        *PageDimensions: PAIR(4724, 6992)
+
+        *PrintableArea: PAIR(4324, 6592)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: JapanDoubleHagakiPostcard
+
+    {
+
+        *Name: "Postcard 2 (??)"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a1038a6d1E"
+
+        }
+
+        *% ???: DoublePostcardRotated=1038 (rawtobr3 strings=145 ?(DHAGAKI=?????); LOW ??)
+
+        *PageDimensions: PAIR(6992, 9449)
+
+        *PrintableArea: PAIR(6592, 9049)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: JapanYou4Envelope
+
+    {
+
+        *Name: "Y4 Env"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&l4096a1039a6d1E"
+
+        }
+
+        *% ???: EnvYou4=1039 (rawtobr3 strings=129 ?; LOW ??)
+
+        *PageDimensions: PAIR(4961, 11102)
+
+        *PrintableArea: PAIR(4561, 10702)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: 16K_195x270mm
+
+    {
+
+        *Name: "16K(195x270mm)"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u600D<1B>*c4606X<1B>*c6378Y<1B>*c0P"
+
+        }
+
+        *% ? rawtobr3 ??? ? PCL5 ?????????: 195x270 mm = 4606x6378 ?@600dpi (16K ?? ? *c ??)
+
+        *PageDimensions: PAIR(9213, 12756)
+
+        *PrintableArea: PAIR(8813, 12356)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: 16K_184x260mm
+
+    {
+
+        *Name: "16K(184x260mm)"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u600D<1B>*c4346X<1B>*c6142Y<1B>*c0P"
+
+        }
+
+        *% ? rawtobr3 ??? ? PCL5 ?????????: 184x260 mm = 4346x6142 ?@600dpi (16K ?? ? *c ??)
+
+        *PageDimensions: PAIR(8693, 12283)
+
+        *PrintableArea: PAIR(8293, 11883)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: 16K_197x273mm
+
+    {
+
+        *Name: "16K(197x273mm)"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u600D<1B>*c4654X<1B>*c6449Y<1B>*c0P"
+
+        }
+
+        *% ? rawtobr3 ??? ? PCL5 ?????????: 197x273 mm = 4654x6449 ?@600dpi (16K ?? ? *c ??)
+
+        *PageDimensions: PAIR(9307, 12898)
+
+        *PrintableArea: PAIR(8907, 12498)
+
+        *PrintableOrigin: PAIR(200, 200)
+
+        *% PPD *HWMargins 12pt ? 200 master units
+
+    }
+
+    *Option: CUSTOM1
+
+    {
+
+        *Name: "[CUSTOM1]Custom"
+
+        *MinSize: PAIR(3600, 6000)
+
+        *MaxSize: PAIR(10200, 16800)
+
+        *MaxPrintableWidth: 9800
+
+        *MinLeftMargin: 200
+
+        *CenterPrintable?: FALSE
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u1200D<1B>*c4960X<1B>*c7016Y<1B>*c0P"
+
+        }
+
+        *% ????? 76-215 x 127-355 mm; *c0P=PCL5 custom(???? master units@&u1200D, LOW ??)
+
+    }
+
+    *Option: CUSTOM2
+
+    {
+
+        *Name: "[CUSTOM2]Custom"
+
+        *MinSize: PAIR(3600, 6000)
+
+        *MaxSize: PAIR(10200, 16800)
+
+        *MaxPrintableWidth: 9800
+
+        *MinLeftMargin: 200
+
+        *CenterPrintable?: FALSE
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u1200D<1B>*c4960X<1B>*c7016Y<1B>*c0P"
+
+        }
+
+        *% ????? 76-215 x 127-355 mm; *c0P=PCL5 custom(???? master units@&u1200D, LOW ??)
+
+    }
+
+    *Option: CUSTOM3
+
+    {
+
+        *Name: "[CUSTOM3]Custom"
+
+        *MinSize: PAIR(3600, 6000)
+
+        *MaxSize: PAIR(10200, 16800)
+
+        *MaxPrintableWidth: 9800
+
+        *MinLeftMargin: 200
+
+        *CenterPrintable?: FALSE
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u1200D<1B>*c4960X<1B>*c7016Y<1B>*c0P"
+
+        }
+
+        *% ????? 76-215 x 127-355 mm; *c0P=PCL5 custom(???? master units@&u1200D, LOW ??)
+
+    }
+
+    *Option: CustomMediaSize
+
+    {
+
+        *Name: "Custom"
+
+        *MinSize: PAIR(3600, 6000)
+
+        *MaxSize: PAIR(10200, 16800)
+
+        *MaxPrintableWidth: 9800
+
+        *MinLeftMargin: 200
+
+        *CenterPrintable?: FALSE
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.16
+
+            *Cmd: "<1B>&u1200D<1B>*c4960X<1B>*c7016Y<1B>*c0P"
+
+        }
+
+        *% ????? 76-215 x 127-355 mm; *c0P=PCL5 custom(???? master units@&u1200D, LOW ??)
+
+    }
+
+}
+
+*Feature: Halftone
+
+{
+
+    *rcNameID: =HALFTONING_DISPLAY
+
+    *DefaultOption: HT_PATSIZE_AUTO
+
+    *Option: HT_PATSIZE_AUTO
+
+    {
+
+        *rcNameID: =HT_AUTO_SELECT_DISPLAY
+
+    }
+
+*Ifdef: WINNT_50
+
+    *Option: HT_PATSIZE_SUPERCELL_M
+
+    {
+
+        *rcNameID: =HT_SUPERCELL_DISPLAY
+
+    }
+
+*Endif:
+
+    *Option: HT_PATSIZE_6x6_M
+
+    {
+
+        *rcNameID: =HT_DITHER6X6_DISPLAY
+
+    }
+
+    *Option: HT_PATSIZE_8x8_M
+
+    {
+
+        *rcNameID: =HT_DITHER8X8_DISPLAY
+
+    }
+
+}
+
+*Command: CmdStartPage
+
+{
+
+    *Order: PAGE_SETUP.1
+
+    *Cmd: "<0D>"
+
+}
+
+*RotateCoordinate?: FALSE
+
+*RotateRaster?: FALSE
+
+*RotateFont?: FALSE
+
+*switch: Orientation
+
+{
+
+    *case: PORTRAIT
+
+    {
+
+        *TextCaps: LIST(TC_OP_CHARACTER,TC_EA_DOUBLE,TC_IA_ABLE,TC_UA_ABLE,TC_RA_ABLE)
+
+    }
+
+    *case: LANDSCAPE_CC270
+
+    {
+
+        *TextCaps: LIST(TC_RA_ABLE)
+
+    }
+
+}
+
+*CursorXAfterCR: AT_CURSOR_X_ORIGIN
+
+*YMoveAttributes: LIST(SEND_CR_FIRST)
+
+*MaxLineSpacing: 255
+
+*YMoveThreshold: *
+
+*YMoveUnit: 216
+
+*Command: CmdYMoveRelDown { *Cmd : "<1B>J" %c[0,255]{max_repeat(DestYRel )} }
+
+*Command: CmdSetLineSpacing { *Cmd : "<1B>3" %c[0,255]{LinefeedSpacing } }
+
+*Command: CmdCR { *Cmd : "<0D>" }
+
+*Command: CmdLF { *Cmd : "<0A>" }
+
+*Command: CmdFF { *Cmd : "<0C>" }
+
+*Command: CmdBackSpace { *Cmd : "<08>" }
+
+*Command: CmdUniDirectionOn { *Cmd : "<1B>U<01>" }
+
+*Command: CmdUniDirectionOff { *Cmd : "<1B>U<00>" }
+
+*EjectPageWithFF?: TRUE
+
+*OutputDataFormat: V_BYTE
+
+*OptimizeLeftBound?: FALSE
+
+*CursorXAfterSendBlockData: AT_GRXDATA_END
+
+*CursorYAfterSendBlockData: NO_MOVE
+
+*DefaultFont: 131
+
+*DefaultCTT: -1
+
+*switch: Orientation
+
+{
+
+    *case: PORTRAIT
+
+    {
+
+        *DeviceFonts: LIST(131)
+
+    }
+
+    *case: LANDSCAPE_CC270
+
+    {
+
+        *DeviceFonts: LIST()
+
+    }
+
+}
+
+*Command: CmdBoldOn { *Cmd : "<1B>G" }
+
+*Command: CmdBoldOff { *Cmd : "<1B>H" }
+
+*Command: CmdItalicOn { *Cmd : "<1B>4" }
+
+*Command: CmdItalicOff { *Cmd : "<1B>5" }
+
+*Command: CmdUnderlineOn { *Cmd : "<1B>-<01>" }
+
+*Command: CmdUnderlineOff { *Cmd : "<1B>-<00>" }
+
+*Feature: MediaType
+
+{
+
+    *Name: "MediaType"
+
+    *DefaultOption: PLAIN
+
+    *Option: PLAIN
+
+    {
+
+        *Name: "Plain"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = REGULAR<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = REGULAR
+
+    }
+
+    *Option: THIN
+
+    {
+
+        *Name: "Thin"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = THIN<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = THIN
+
+    }
+
+    *Option: THICK
+
+    {
+
+        *Name: "Thick"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = THICK<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = THICK
+
+    }
+
+    *Option: THICKERPAPER2
+
+    {
+
+        *Name: "?Thick"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = THICK2<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = THICK2
+
+    }
+
+    *Option: BOND
+
+    {
+
+        *Name: "Cotton"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = BOND<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = BOND
+
+    }
+
+    *Option: ENV
+
+    {
+
+        *Name: "Env"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = ENVELOPES<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = ENVELOPES
+
+    }
+
+    *Option: ENVTHICK
+
+    {
+
+        *Name: "?Env"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = ENVTHICK<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = ENVTHICK
+
+    }
+
+    *Option: ENVTHIN
+
+    {
+
+        *Name: "?Env"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = ENVTHIN<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = ENVTHIN
+
+    }
+
+    *Option: RECYCLED
+
+    {
+
+        *Name: "Recycled"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.2
+
+            *Cmd: "@PJL SET MEDIATYPE = RECYCLED<0A>"
+
+        }
+
+        *% rawtobr3_strings.txt 65-73 ?: @PJL SET MEDIATYPE = RECYCLED
+
+    }
+
+}
+
+*Feature: MyDuplex
+
+{
+
+    *Name: "Duplex"
+
+    *DefaultOption: OneSided
+
+    *Option: OneSided
+
+    {
+
+        *Name: "None"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.17
+
+            *Cmd: "<1B>&l0S"
+
+        }
+
+        *% rawtobr3 strings=98 ? ESC&l0S
+
+    }
+
+    *Option: DuplexNoTumble
+
+    {
+
+        *Name: "LongEdge"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.17
+
+            *Cmd: "<1B>&l1S"
+
+        }
+
+        *% rawtobr3 strings=99 ? ESC&l1S(??)
+
+    *% UIConstraints ? *Constraints(4 ?)
+
+    }
+
+    *Option: DuplexTumble
+
+    {
+
+        *Name: "ShortEdge"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.17
+
+            *Cmd: "<1B>&l2S"
+
+        }
+
+        *% rawtobr3 strings=100 ? ESC&l2S(??)
+
+    *% UIConstraints ? *Constraints(4 ?)
+
+    }
+
+}
+
+*Feature: TonerSave
+
+{
+
+    *Name: "TonerSave"
+
+    *DefaultOption: OFF
+
+    *Option: OFF
+
+    {
+
+        *Name: "OFF"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.3
+
+            *Cmd: "@PJL SET ECONOMODE = OFF<0A>"
+
+        }
+
+        *% rawtobr3 strings=43 ?
+
+    }
+
+    *Option: ON
+
+    {
+
+        *Name: "ON"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.3
+
+            *Cmd: "@PJL SET ECONOMODE = ON<0A>"
+
+        }
+
+        *% rawtobr3 strings=42 ?
+
+    }
+
+}
+
+*Feature: Sleep
+
+{
+
+    *Name: "Sleep"
+
+    *DefaultOption: PRINTER
+
+    *Option: PRINTER
+
+    {
+
+        *Name: "PrinterDefault"
+
+        *% ????, ????
+
+    }
+
+    *Option: 2
+
+    {
+
+        *Name: "2"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.4
+
+            *Cmd: "@PJL SET AUTOSLEEP=2<0A>"
+
+        }
+
+        *% rawtobr3=83 ? "@PJL SET AUTOSLEEP=" ?? + ???(MEDIUM ??)
+
+    }
+
+    *Option: 10
+
+    {
+
+        *Name: "10"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.4
+
+            *Cmd: "@PJL SET AUTOSLEEP=10<0A>"
+
+        }
+
+        *% rawtobr3=83 ? "@PJL SET AUTOSLEEP=" ?? + ???(MEDIUM ??)
+
+    }
+
+    *Option: 30
+
+    {
+
+        *Name: "30"
+
+        *Command: CmdSelect
+
+        {
+
+            *Order: DOC_SETUP.4
+
+            *Cmd: "@PJL SET AUTOSLEEP=30<0A>"
+
+        }
+
+        *% rawtobr3=83 ? "@PJL SET AUTOSLEEP=" ?? + ???(MEDIUM ??)
+
+    }
+
+}
+
+*Command: CmdStartJob
+
+{
+
+    *Order: JOB_SETUP.1
+
+    *Cmd : "<1B>%%-12345X@PJL<0A>@PJL JOB NAME=<22>Lenovo print job<22><0A>"
+
+}
+
+*Command: CmdStartDoc
+
+{
+
+    *Order: DOC_SETUP.14
+
+    *Cmd : "@PJL ENTER LANGUAGE = PCL<0A>"
+
+}
+
+*Command: CmdEndJob
+
+{
+
+    *Order: JOB_FINISH.1
+
+    *Cmd : "@PJL EOJ NAME=<22>Lenovo print job<22><0A><1B>%%-12345X"
+
+}
