@@ -1,0 +1,8 @@
+﻿==== LJ2400Setup 自检：state.json 读写 ====
+  [PASS] 缺失 state.json 时 Read() 返回 null
+  [PASS] 状态 pending_signature 写入/读回八字段一致
+  [PASS] 状态 pending_reboot 写入/读回八字段一致
+  [PASS] 状态 ready 写入/读回八字段一致
+  [PASS] 状态 installed 写入/读回八字段一致
+  [PASS] 损坏 state.json 容错返回 null
+[PASS] state.json 读写测试全部通过
