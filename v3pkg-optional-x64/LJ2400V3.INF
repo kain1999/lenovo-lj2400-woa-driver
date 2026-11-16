@@ -1,0 +1,320 @@
+[Version]
+Signature="$Windows NT$"
+Provider=%LENOVO%
+ClassGUID={4D36E979-E325-11CE-BFC1-08002BE10318}
+Class=Printer
+DriverVer=11/16/2026,1.0.0.1
+
+[Manufacturer]
+%LENOVO%=Lenovo, NTamd64
+
+[Lenovo.NTamd64]
+%Model.1% = LJ2400Pro.Install
+%Model.2% = LJ2405.Install
+%Model.3% = LJ2405D.Install
+%Model.4% = LJ2605D.Install
+%Model.5% = LJ2655DN.Install
+%Model.6% = LJ2680DN.Install
+%Model.7% = M7400Pro.Install
+%Model.8% = M7400W.Install
+%Model.9% = M7405D.Install
+%Model.10% = M7405DW.Install
+%Model.11% = M7450FPro.Install
+%Model.12% = M7455DNF.Install
+%Model.13% = M7460.Install
+%Model.14% = M7480.Install
+%Model.15% = M7490DNF.Install
+%Model.16% = M7605D.Install
+%Model.17% = M7605DW.Install
+%Model.18% = M7615DNA.Install
+%Model.19% = M7625DWA.Install
+%Model.20% = M7626DNA.Install
+%Model.21% = M7628DNA.Install
+%Model.22% = M7655DHF.Install
+%Model.23% = M7675DXF.Install
+%Model.24% = M7680D.Install
+%Model.25% = M7685DXF.Install
+%Model.26% = M7686DXF.Install
+%Model.27% = M7690DNA.Install
+
+[LJ2400Pro.Install]
+DataFile=LJ2400Pro.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2400Pro.gpd
+
+[LJ2405.Install]
+DataFile=LJ2405.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2405.gpd
+
+[LJ2405D.Install]
+DataFile=LJ2405D.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2405D.gpd
+
+[LJ2605D.Install]
+DataFile=LJ2605D.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2605D.gpd
+
+[LJ2655DN.Install]
+DataFile=LJ2655DN.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2655DN.gpd
+
+[LJ2680DN.Install]
+DataFile=LJ2680DN.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@LJ2680DN.gpd
+
+[M7400Pro.Install]
+DataFile=M7400Pro.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7400Pro.gpd
+
+[M7400W.Install]
+DataFile=M7400W.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7400W.gpd
+
+[M7405D.Install]
+DataFile=M7405D.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7405D.gpd
+
+[M7405DW.Install]
+DataFile=M7405DW.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7405DW.gpd
+
+[M7450FPro.Install]
+DataFile=M7450FPro.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7450FPro.gpd
+
+[M7455DNF.Install]
+DataFile=M7455DNF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7455DNF.gpd
+
+[M7460.Install]
+DataFile=M7460.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7460.gpd
+
+[M7480.Install]
+DataFile=M7480.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7480.gpd
+
+[M7490DNF.Install]
+DataFile=M7490DNF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7490DNF.gpd
+
+[M7605D.Install]
+DataFile=M7605D.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7605D.gpd
+
+[M7605DW.Install]
+DataFile=M7605DW.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7605DW.gpd
+
+[M7615DNA.Install]
+DataFile=M7615DNA.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7615DNA.gpd
+
+[M7625DWA.Install]
+DataFile=M7625DWA.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7625DWA.gpd
+
+[M7626DNA.Install]
+DataFile=M7626DNA.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7626DNA.gpd
+
+[M7628DNA.Install]
+DataFile=M7628DNA.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7628DNA.gpd
+
+[M7655DHF.Install]
+DataFile=M7655DHF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7655DHF.gpd
+
+[M7675DXF.Install]
+DataFile=M7675DXF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7675DXF.gpd
+
+[M7680D.Install]
+DataFile=M7680D.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7680D.gpd
+
+[M7685DXF.Install]
+DataFile=M7685DXF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7685DXF.gpd
+
+[M7686DXF.Install]
+DataFile=M7686DXF.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7686DXF.gpd
+
+[M7690DNA.Install]
+DataFile=M7690DNA.gpd
+DriverFile=UNIDRV.DLL
+ConfigFile=UNIDRVUI.DLL
+HelpFile=UNIDRV.HLP
+DriverIsolation=2
+CopyFiles=@M7690DNA.gpd
+
+[DestinationDirs]
+DefaultDestDir=66000
+
+[SourceDisksNames]
+1 = %Disk1%
+
+[SourceDisksFiles]
+LJ2400Pro.gpd=1
+LJ2405.gpd=1
+LJ2405D.gpd=1
+LJ2605D.gpd=1
+LJ2655DN.gpd=1
+LJ2680DN.gpd=1
+M7400Pro.gpd=1
+M7400W.gpd=1
+M7405D.gpd=1
+M7405DW.gpd=1
+M7450FPro.gpd=1
+M7455DNF.gpd=1
+M7460.gpd=1
+M7480.gpd=1
+M7490DNF.gpd=1
+M7605D.gpd=1
+M7605DW.gpd=1
+M7615DNA.gpd=1
+M7625DWA.gpd=1
+M7626DNA.gpd=1
+M7628DNA.gpd=1
+M7655DHF.gpd=1
+M7675DXF.gpd=1
+M7680D.gpd=1
+M7685DXF.gpd=1
+M7686DXF.gpd=1
+M7690DNA.gpd=1
+
+[Strings]
+LENOVO="Lenovo"
+Disk1="Lenovo LJ24/LJ26/M74/M76 v3 Driver Disk"
+Model.1 = "Lenovo LJ2400 Pro"
+Model.2 = "Lenovo LJ2405"
+Model.3 = "Lenovo LJ2405D"
+Model.4 = "Lenovo LJ2605D"
+Model.5 = "Lenovo LJ2655DN"
+Model.6 = "Lenovo LJ2680DN"
+Model.7 = "Lenovo M7400 Pro"
+Model.8 = "Lenovo M7400W"
+Model.9 = "Lenovo M7405D"
+Model.10 = "Lenovo M7405DW"
+Model.11 = "Lenovo M7450F Pro"
+Model.12 = "Lenovo M7455DNF"
+Model.13 = "Lenovo M7460"
+Model.14 = "Lenovo M7480"
+Model.15 = "Lenovo M7490DNF"
+Model.16 = "Lenovo M7605D"
+Model.17 = "Lenovo M7605DW"
+Model.18 = "Lenovo M7615DNA"
+Model.19 = "Lenovo M7625DWA"
+Model.20 = "Lenovo M7626DNA"
+Model.21 = "Lenovo M7628DNA"
+Model.22 = "Lenovo M7655DHF"
+Model.23 = "Lenovo M7675DXF"
+Model.24 = "Lenovo M7680D"
+Model.25 = "Lenovo M7685DXF"
+Model.26 = "Lenovo M7686DXF"
+Model.27 = "Lenovo M7690DNA"
