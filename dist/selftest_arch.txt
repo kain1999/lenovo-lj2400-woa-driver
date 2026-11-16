@@ -1,0 +1,7 @@
+﻿==== LJ2400Setup 自检：ARM64 检测 ====
+GetNativeSystemInfo().wProcessorArchitecture = 9 → x64
+  [PASS] 返回值属于已知架构集合 {0=x86, 9=x64, 12=ARM64}
+环境变量 PROCESSOR_ARCHITECTURE = AMD64
+  [PASS] x64 检测与环境变量 AMD64 一致
+  [PASS] IsArm64() 与 GetArch()==12 判定一致
+[PASS] ARM64 检测函数单测通过
