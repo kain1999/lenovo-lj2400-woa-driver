@@ -15,7 +15,7 @@ $srcManager    = Join-Path $installerRoot "Manager\Manager.cs"
 $driverDir     = Join-Path $woaRoot "driver"
 $logPath       = Join-Path $dist "build_log.txt"
 
-# csc.exe 定位（Framework64 优先，Framework 兜底）
+# csc.exe 定位（Framework64 优先，Framework 备用路径）
 $csc = Join-Path $env:SystemRoot "Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 if (-not (Test-Path $csc)) { $csc = Join-Path $env:SystemRoot "Microsoft.NET\Framework\v4.0.30319\csc.exe" }
 if (-not (Test-Path $csc)) { throw "未找到 csc.exe（需要 .NET Framework 4.x）" }
@@ -25,7 +25,8 @@ New-Item -ItemType Directory -Force -Path $dist | Out-Null
 
 function Invoke-Csc {
     param([string]$Out, [string[]]$SourceFiles, [bool]$UseManifest)
-    $cscArgs = @("/nologo", "/target:winexe", "/platform:anycpu", "/optimize+", "/out:$Out")
+    # System.Net.Http.dll：Setup 的 HttpClient SDK 安装器下载用（Manager 无引用，仅多链接一个 BCL 程序集）
+    $cscArgs = @("/nologo", "/target:winexe", "/platform:anycpu", "/optimize+", "/r:System.Net.Http.dll", "/out:$Out")
     if ($UseManifest) { $cscArgs += "/win32manifest:$script:manifest" }
     $cscArgs += $SourceFiles
     (& $script:csc @cscArgs 2>&1) | Out-File -FilePath $script:logPath -Append -Encoding utf8
