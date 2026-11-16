@@ -1,0 +1,473 @@
+﻿nth paddr      vaddr      len size section type  string
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――
+0   0x000092ec 0x000092ec 5   6    .rodata ascii -func
+1   0x000092f2 0x000092f2 7   8    .rodata ascii -offset
+2   0x000092fd 0x000092fd 6   7    .rodata ascii -flags
+3   0x00009308 0x00009308 5   6    .rodata ascii %dx%d
+4   0x0000930e 0x0000930e 6   7    .rodata ascii -owner
+5   0x00009315 0x00009315 9   10   .rodata ascii -nodename
+6   0x0000931f 0x0000931f 9   10   .rodata ascii -password
+7   0x00009329 0x00009329 8   9    .rodata ascii -jobname
+8   0x00009332 0x00009332 11  12   .rodata ascii -enable-euf
+9   0x00009348 0x00009348 5   6    .rodata ascii OWNER
+10  0x0000934e 0x0000934e 8   9    .rodata ascii PASSWORD
+11  0x00009357 0x00009357 5   6    .rodata ascii TITLE
+12  0x0000935d 0x0000935d 8   9    .rodata ascii NODENAME
+13  0x00009366 0x00009366 7   8    .rodata ascii CHARSET
+14  0x0000936e 0x0000936e 5   6    .rodata ascii utf-8
+15  0x00009374 0x00009374 5   6    .rodata ascii UTF-8
+16  0x0000937a 0x0000937a 6   7    .rodata ascii euc-jp
+17  0x00009381 0x00009381 6   7    .rodata ascii EUC-JP
+18  0x00009388 0x00009388 6   7    .rodata ascii euc-tw
+19  0x0000938f 0x0000938f 6   7    .rodata ascii EUC-TW
+20  0x00009396 0x00009396 6   7    .rodata ascii euc-cn
+21  0x0000939d 0x0000939d 6   7    .rodata ascii EUC-CN
+22  0x000093a4 0x000093a4 6   7    .rodata ascii euc-kr
+23  0x000093ab 0x000093ab 6   7    .rodata ascii EUC-KR
+24  0x000093b2 0x000093b2 8   9    .rodata ascii paperinf
+25  0x000093bb 0x000093bb 15  16   .rodata ascii [SelectionItem]
+26  0x000093ce 0x000093ce 6   7    .rodata ascii Duplex
+27  0x000093d5 0x000093d5 6   7    .rodata ascii MpTray
+28  0x000093dc 0x000093dc 12  13   .rodata ascii Paper Source
+29  0x000093e9 0x000093e9 10  11   .rodata ascii AutoSelect
+30  0x00009461 0x00009461 14  15   .rodata ascii \e%-12345X@PJL\n
+31  0x000094c0 0x000094c0 33  34   .rodata ascii  @PJL JOB NAME="Linux print job"\n
+32  0x00009520 0x00009520 33  34   .rodata ascii  @PJL EOJ NAME="Linux print job"\n
+33  0x00009580 0x00009580 10  11   .rodata ascii \t\e%-12345X
+34  0x000096a1 0x000096a1 28  29   .rodata ascii @PJL SET RAS1200MODE = TRUE\n
+35  0x00009701 0x00009701 26  27   .rodata ascii @PJL SET RAS1200MODE = ON\n
+36  0x00009760 0x00009760 28  29   .rodata ascii \e@PJL SET RAS1200MODE = OFF\n
+37  0x000097c0 0x000097c0 28  29   .rodata ascii \e@PJL SET RESOLUTION = 1200\n
+38  0x00009821 0x00009821 26  27   .rodata ascii @PJL SET RESOLUTION = 600\n
+39  0x00009881 0x00009881 26  27   .rodata ascii @PJL SET RESOLUTION = 300\n
+40  0x000098e0 0x000098e0 57  58   .rodata ascii 8@PJL SET RESOLUTION = 1200\n@PJL SET PAPERFEEDSPEED=HALF\n
+41  0x00009940 0x00009940 57  58   .rodata ascii 8@PJL SET RESOLUTION = 1200\n@PJL SET PAPERFEEDSPEED=FULL\n
+42  0x000099a1 0x000099a1 24  25   .rodata ascii @PJL SET ECONOMODE = ON\n
+43  0x00009a01 0x00009a01 25  26   .rodata ascii @PJL SET ECONOMODE = OFF\n
+44  0x00009a61 0x00009a61 28  29   .rodata ascii @PJL SET SOURCETRAY = TRAY1\n
+45  0x00009ac1 0x00009ac1 28  29   .rodata ascii @PJL SET SOURCETRAY = TRAY2\n
+46  0x00009b21 0x00009b21 28  29   .rodata ascii @PJL SET SOURCETRAY = TRAY3\n
+47  0x00009b81 0x00009b81 28  29   .rodata ascii @PJL SET SOURCETRAY = TRAY4\n
+48  0x00009be1 0x00009be1 28  29   .rodata ascii @PJL SET SOURCETRAY = TRAY5\n
+49  0x00009c41 0x00009c41 29  30   .rodata ascii @PJL SET SOURCETRAY = MPTRAY\n
+50  0x00009ca0 0x00009ca0 28  29   .rodata ascii \e@PJL SET SOURCETRAY = AUTO\n
+51  0x00009d01 0x00009d01 23  24   .rodata ascii @PJL SET OUTBIN = AUTO\n
+52  0x00009d61 0x00009d61 24  25   .rodata ascii @PJL SET OUTBIN = UPPER\n
+53  0x00009dc1 0x00009dc1 28  29   .rodata ascii @PJL SET OUTBIN = ALLSORTER\n
+54  0x00009e21 0x00009e21 29  30   .rodata ascii @PJL SET OUTBIN = ALLSTACKER\n
+55  0x00009e80 0x00009e80 28  29   .rodata ascii \e@PJL SET OUTBIN = OPTIONAL\n
+56  0x00009ee0 0x00009ee0 38  39   .rodata ascii %@PJL SET OUTBIN = OPTIONALOUTPUTBIN1\n
+57  0x00009f40 0x00009f40 38  39   .rodata ascii %@PJL SET OUTBIN = OPTIONALOUTPUTBIN2\n
+58  0x00009fa0 0x00009fa0 38  39   .rodata ascii %@PJL SET OUTBIN = OPTIONALOUTPUTBIN3\n
+59  0x0000a000 0x0000a000 38  39   .rodata ascii %@PJL SET OUTBIN = OPTIONALOUTPUTBIN4\n
+60  0x0000a061 0x0000a061 16  17   .rodata ascii @PJL SET COPY=1\n
+61  0x0000a0c1 0x0000a0c1 16  17   .rodata ascii @PJL SET COPY=2\n
+62  0x0000a121 0x0000a121 16  17   .rodata ascii @PJL SET COPY=3\n
+63  0x0000a181 0x0000a181 16  17   .rodata ascii @PJL SET COPY=4\n
+64  0x0000a1e1 0x0000a1e1 16  17   .rodata ascii @PJL SET COPY=5\n
+65  0x0000a241 0x0000a241 29  30   .rodata ascii @PJL SET MEDIATYPE = REGULAR\n
+66  0x0000a2a1 0x0000a2a1 26  27   .rodata ascii @PJL SET MEDIATYPE = THIN\n
+67  0x0000a300 0x0000a300 28  29   .rodata ascii \e@PJL SET MEDIATYPE = THICK\n
+68  0x0000a361 0x0000a361 28  29   .rodata ascii @PJL SET MEDIATYPE = THICK2\n
+69  0x0000a3c0 0x0000a3c0 35  36   .rodata ascii "@PJL SET MEDIATYPE = TRANSPARENCY\n
+70  0x0000a421 0x0000a421 31  32   .rodata ascii @PJL SET MEDIATYPE = ENVELOPES\n
+71  0x0000a481 0x0000a481 30  31   .rodata ascii @PJL SET MEDIATYPE = ENVTHICK\n
+72  0x0000a4e1 0x0000a4e1 29  30   .rodata ascii @PJL SET MEDIATYPE = ENVTHIN\n
+73  0x0000a541 0x0000a541 30  31   .rodata ascii @PJL SET MEDIATYPE = RECYCLED\n
+74  0x0000a5a1 0x0000a5a1 22  23   .rodata ascii @PJL SET HQMMODE = ON\n
+75  0x0000a601 0x0000a601 23  24   .rodata ascii @PJL SET HQMMODE = OFF\n
+76  0x0000a660 0x0000a660 33  34   .rodata ascii  @PJL SET ORIENTATION = PORTRAIT\n
+77  0x0000a6c1 0x0000a6c1 16  18   .rodata ascii @PJL SET PAPER =
+78  0x0000a721 0x0000a721 26  27   .rodata ascii @PJL SET RIGHTMARGIN = 78\n
+79  0x0000a781 0x0000a781 28  29   .rodata ascii @PJL SET PAGEPROTECT = AUTO\n
+80  0x0000a7e1 0x0000a7e1 26  27   .rodata ascii @PJL ENTER LANGUAGE = PCL\n
+81  0x0000a841 0x0000a841 23  24   .rodata ascii @PJL DEFAULT AUTOSLEEP=
+82  0x0000a8a1 0x0000a8a1 26  27   .rodata ascii @PJL DEFAULT TIMEOUTSLEEP=
+83  0x0000a901 0x0000a901 19  20   .rodata ascii @PJL SET AUTOSLEEP=
+84  0x0000a961 0x0000a961 22  23   .rodata ascii @PJL SET TIMEOUTSLEEP=
+85  0x0000aa21 0x0000aa21 4   5    .rodata ascii OFF\n
+86  0x0000aa81 0x0000aa81 18  19   .rodata ascii @PJL SET USERNAME=
+87  0x0000aae1 0x0000aae1 19  20   .rodata ascii @PJL SET LOGINUSER=
+88  0x0000ab41 0x0000ab41 17  18   .rodata ascii @PJL SET HOLDKEY=
+89  0x0000aba1 0x0000aba1 17  18   .rodata ascii @PJL SET JOBNAME=
+90  0x0000ac01 0x0000ac01 19  20   .rodata ascii @PJL SET HOLD=STORE
+91  0x0000ac61 0x0000ac61 25  26   .rodata ascii @PJL SET HOLDTYPE=PRIVATE
+92  0x0000acc1 0x0000acc1 17  18   .rodata ascii @PJL SET HOLDKEY=
+93  0x0000ad21 0x0000ad21 20  21   .rodata ascii @PJL SET REPRINT=OFF
+94  0x0000ad80 0x0000ad80 8   9    .rodata ascii \a\e*t150R
+95  0x0000ade0 0x0000ade0 8   9    .rodata ascii \a\e*t300R
+96  0x0000ae40 0x0000ae40 8   9    .rodata ascii \a\e*t600R
+97  0x0000aea0 0x0000aea0 9   10   .rodata ascii \b\e*t1200R
+98  0x0000b0e1 0x0000b0e1 5   6    .rodata ascii \e&l0S
+99  0x0000b141 0x0000b141 5   6    .rodata ascii \e&l1S
+100 0x0000b1a1 0x0000b1a1 5   6    .rodata ascii \e&l2S
+101 0x0000b201 0x0000b201 5   6    .rodata ascii \e&l1H
+102 0x0000b261 0x0000b261 5   6    .rodata ascii \e&l2H
+103 0x0000b2c0 0x0000b2c0 9   10   .rodata ascii \b\e&l1001H
+104 0x0000b321 0x0000b321 5   6    .rodata ascii \e&l0E
+105 0x0000b440 0x0000b440 13  14   .rodata ascii \f\e&l5.4C\e&l1E
+106 0x0000b4a1 0x0000b4a1 5   6    .rodata ascii \e*r0A
+107 0x0000b501 0x0000b501 4   5    .rodata ascii \e*rB
+108 0x0000b620 0x0000b620 9   10   .rodata ascii \b\e*b1030m
+109 0x0000b681 0x0000b681 5   6    .rodata ascii 1030M
+110 0x0000b740 0x0000b740 9   10   .rodata ascii \b\e&u1200D
+111 0x0000b7a0 0x0000b7a0 8   9    .rodata ascii \a\e&u600D
+112 0x0000b800 0x0000b800 8   9    .rodata ascii \a\e&u300D
+113 0x0000b860 0x0000b860 8   9    .rodata ascii \a\e&u150D
+114 0x0000b8c0 0x0000b8c0 9   10   .rodata ascii \b\e*t1200R
+115 0x0000b920 0x0000b920 8   9    .rodata ascii \a\e*t600R
+116 0x0000b980 0x0000b980 8   9    .rodata ascii \a\e*t300R
+117 0x0000b9e0 0x0000b9e0 8   9    .rodata ascii \a\e*t150R
+118 0x0000ba21 0x0000ba21 22  23   .rodata ascii /tmp/rawtobr_tmp_%x_%x
+119 0x0000ba3c 0x0000ba3c 19  20   .rodata ascii @PJL EOJ NAME="%s"\n
+120 0x0000ba50 0x0000ba50 20  21   .rodata ascii %a,%d %b %Y %H:%M:%S
+121 0x0000ba68 0x0000ba68 31  32   .rodata ascii @PJL PRINTLOG ITEM = 1,PRINTER\n
+122 0x0000ba88 0x0000ba88 26  27   .rodata ascii @PJL PRINTLOG ITEM = 2,%s\n
+123 0x0000baa3 0x0000baa3 26  27   .rodata ascii @PJL PRINTLOG ITEM = 3,%s\n
+124 0x0000babe 0x0000babe 26  27   .rodata ascii @PJL PRINTLOG ITEM = 4,%s\n
+125 0x0000bad9 0x0000bad9 12  13   .rodata ascii %Y%m%d%H%M%S
+126 0x0000bae6 0x0000bae6 22  23   .rodata ascii @PJL SET JOBTIME = %s\n
+127 0x0000bafd 0x0000bafd 19  20   .rodata ascii @PJL JOB NAME="%s"\n
+128 0x0000bb11 0x0000bb11 28  29   .rodata ascii @PJL SET STRINGCODESET=UTF8\n
+129 0x0000bc58 0x0000bc58 17  18   .rodata ascii \e&l4096a1039a6d1E
+130 0x0000bc6a 0x0000bc6a 15  16   .rodata ascii \e&l4096a80a6d1E
+131 0x0000bc7a 0x0000bc7a 15  16   .rodata ascii \e&l4096a71a6d1E
+132 0x0000bc8a 0x0000bc8a 15  16   .rodata ascii \e&l4096a81a6d1E
+133 0x0000bc9a 0x0000bc9a 15  16   .rodata ascii \e&l4096a24a6d1E
+134 0x0000bcaa 0x0000bcaa 17  18   .rodata ascii \e&l4096a1040a6d1E
+135 0x0000bcbc 0x0000bcbc 15  16   .rodata ascii \e&l4096a90a6d1E
+136 0x0000bccc 0x0000bccc 17  18   .rodata ascii \e&l4096a1024a6d1E
+137 0x0000bcde 0x0000bcde 15  16   .rodata ascii \e&l4096a44a6d1E
+138 0x0000bcee 0x0000bcee 15  16   .rodata ascii \e&l4096a25a6d1E
+139 0x0000bcfe 0x0000bcfe 15  16   .rodata ascii \e&l4096a91a6d1E
+140 0x0000bd0e 0x0000bd0e 16  17   .rodata ascii \e&l4096a100a6d1E
+141 0x0000bd1f 0x0000bd1f 15  16   .rodata ascii \e&l4096a45a6d1E
+142 0x0000bd2f 0x0000bd2f 14  15   .rodata ascii \e&l4096a1a6d1E
+143 0x0000bd3e 0x0000bd3e 15  16   .rodata ascii \e&l4096a26a6d1E
+144 0x0000bd4e 0x0000bd4e 14  15   .rodata ascii \e&l4096a2a6d1E
+145 0x0000bd5d 0x0000bd5d 17  18   .rodata ascii \e&l4096a1038a6d1E
+146 0x0000bd6f 0x0000bd6f 14  15   .rodata ascii \e&l4096a3a6d1E
+147 0x0000bd7e 0x0000bd7e 5   6    .rodata ascii FOLIO
+148 0x0000bd84 0x0000bd84 7   8    .rodata ascii EnvYou4
+149 0x0000bd90 0x0000bd90 6   7    .rodata ascii CUSTOM
+150 0x0000bd97 0x0000bd97 16  17   .rodata ascii \e&l4096a101a6d1E
+151 0x0000bdaf 0x0000bdaf 11  12   .rodata ascii @Resolution
+152 0x0000bdbb 0x0000bdbb 11  12   .rodata ascii PaperSource
+153 0x0000bdc7 0x0000bdc7 6   7    .rodata ascii Duplex
+154 0x0000bdce 0x0000bdce 10  11   .rodata ascii DuplexType
+155 0x0000bdd9 0x0000bdd9 9   10   .rodata ascii PaperType
+156 0x0000bde3 0x0000bde3 5   6    .rodata ascii Media
+157 0x0000bde9 0x0000bde9 6   7    .rodata ascii Copies
+158 0x0000bdf0 0x0000bdf0 5   6    .rodata ascii Sleep
+159 0x0000bdf6 0x0000bdf6 13  14   .rodata ascii TonerSaveMode
+160 0x0000be04 0x0000be04 9   10   .rodata ascii OutputBin
+161 0x0000be0e 0x0000be0e 8   9    .rodata ascii LANG_USA
+162 0x0000be17 0x0000be17 11  12   .rodata ascii LANG_CANADA
+163 0x0000be23 0x0000be23 10  11   .rodata ascii LANG_OTHER
+164 0x0000be2e 0x0000be2e 4   5    .rodata ascii NULL
+165 0x0000be3b 0x0000be3b 4   5    .rodata ascii 1200
+166 0x0000be40 0x0000be40 7   8    .rodata ascii HQ1200A
+167 0x0000be48 0x0000be48 7   8    .rodata ascii HQ1200B
+168 0x0000be50 0x0000be50 7   8    .rodata ascii 600x300
+169 0x0000be58 0x0000be58 6   7    .rodata ascii Manual
+170 0x0000be5f 0x0000be5f 6   7    .rodata ascii MpTray
+171 0x0000be66 0x0000be66 5   6    .rodata ascii Tray1
+172 0x0000be6c 0x0000be6c 5   6    .rodata ascii Tray2
+173 0x0000be72 0x0000be72 5   6    .rodata ascii Tray3
+174 0x0000be78 0x0000be78 5   6    .rodata ascii Tray4
+175 0x0000be7e 0x0000be7e 5   6    .rodata ascii Tray5
+176 0x0000be84 0x0000be84 10  11   .rodata ascii AutoSelect
+177 0x0000be8f 0x0000be8f 6   7    .rodata ascii MANUAL
+178 0x0000bea8 0x0000bea8 4   5    .rodata ascii AUTO
+179 0x0000bead 0x0000bead 4   5    .rodata ascii Auto
+180 0x0000beb2 0x0000beb2 11  12   .rodata ascii StandardBin
+181 0x0000bebe 0x0000bebe 7   8    .rodata ascii Outbin1
+182 0x0000bec6 0x0000bec6 7   8    .rodata ascii Outbin2
+183 0x0000bece 0x0000bece 7   8    .rodata ascii Outbin3
+184 0x0000bed6 0x0000bed6 7   8    .rodata ascii Outbin4
+185 0x0000bede 0x0000bede 7   8    .rodata ascii Stacker
+186 0x0000bee6 0x0000bee6 7   8    .rodata ascii Sorter2
+187 0x0000beee 0x0000beee 7   8    .rodata ascii Sorter3
+188 0x0000bef6 0x0000bef6 7   8    .rodata ascii Sorter4
+189 0x0000befe 0x0000befe 7   8    .rodata ascii Sorter5
+190 0x0000bf06 0x0000bf06 8   9    .rodata ascii Optional
+191 0x0000bf26 0x0000bf26 4   5    .rodata ascii SRT2
+192 0x0000bf2b 0x0000bf2b 4   5    .rodata ascii SRT3
+193 0x0000bf30 0x0000bf30 4   5    .rodata ascii SRT4
+194 0x0000bf35 0x0000bf35 4   5    .rodata ascii SRT5
+195 0x0000bf45 0x0000bf45 4   5    .rodata ascii Long
+196 0x0000bf4a 0x0000bf4a 5   6    .rodata ascii Short
+197 0x0000bf50 0x0000bf50 4   5    .rodata ascii LONG
+198 0x0000bf55 0x0000bf55 5   6    .rodata ascii SHORT
+199 0x0000bf5e 0x0000bf5e 6   7    .rodata ascii Letter
+200 0x0000bf65 0x0000bf65 5   6    .rodata ascii Legal
+201 0x0000bf6b 0x0000bf6b 8   9    .rodata ascii Exective
+202 0x0000bf86 0x0000bf86 6   7    .rodata ascii Com-10
+203 0x0000bf8d 0x0000bf8d 7   8    .rodata ascii Monarch
+204 0x0000bf95 0x0000bf95 5   6    .rodata ascii JISB5
+205 0x0000bf9b 0x0000bf9b 5   6    .rodata ascii JISB6
+206 0x0000bfa1 0x0000bfa1 8   9    .rodata ascii Postcard
+207 0x0000bfaa 0x0000bfaa 7   8    .rodata ascii DHagaki
+208 0x0000bfb2 0x0000bfb2 7   8    .rodata ascii EnvYou4
+209 0x0000bfba 0x0000bfba 5   6    .rodata ascii PC4x6
+210 0x0000bfc0 0x0000bfc0 5   6    .rodata ascii FOLIO
+211 0x0000bfca 0x0000bfca 8   9    .rodata ascii EnvChou3
+212 0x0000bfd3 0x0000bfd3 8   9    .rodata ascii EnvChou4
+213 0x0000bfe0 0x0000bfe0 9   10   .rodata ascii 195x270mm
+214 0x0000bfea 0x0000bfea 9   10   .rodata ascii 184x260mm
+215 0x0000bff4 0x0000bff4 9   10   .rodata ascii 197x273mm
+216 0x0000bffe 0x0000bffe 7   8    .rodata ascii CUSTOM0
+217 0x0000c006 0x0000c006 7   8    .rodata ascii CUSTOM1
+218 0x0000c00e 0x0000c00e 7   8    .rodata ascii CUSTOM2
+219 0x0000c016 0x0000c016 7   8    .rodata ascii CUSTOM3
+220 0x0000c01e 0x0000c01e 7   8    .rodata ascii CUSTOM4
+221 0x0000c026 0x0000c026 7   8    .rodata ascii CUSTOM5
+222 0x0000c02e 0x0000c02e 7   8    .rodata ascii CUSTOM6
+223 0x0000c036 0x0000c036 7   8    .rodata ascii CUSTOM7
+224 0x0000c03e 0x0000c03e 7   8    .rodata ascii CUSTOM8
+225 0x0000c046 0x0000c046 7   8    .rodata ascii CUSTOM9
+226 0x0000c05f 0x0000c05f 6   7    .rodata ascii COM-10
+227 0x0000c066 0x0000c066 7   8    .rodata ascii MONARCH
+228 0x0000c06e 0x0000c06e 8   9    .rodata ascii POSTCARD
+229 0x0000c077 0x0000c077 7   8    .rodata ascii DHAGAKI
+230 0x0000c07f 0x0000c07f 7   8    .rodata ascii ENVYOU4
+231 0x0000c087 0x0000c087 5   6    .rodata ascii PC4X6
+232 0x0000c08d 0x0000c08d 8   9    .rodata ascii ENVCHOU3
+233 0x0000c096 0x0000c096 8   9    .rodata ascii ENVCHOU4
+234 0x0000c0a3 0x0000c0a3 10  11   .rodata ascii PlainPaper
+235 0x0000c0ae 0x0000c0ae 9   10   .rodata ascii ThinPaper
+236 0x0000c0b8 0x0000c0b8 10  11   .rodata ascii ThickPaper
+237 0x0000c0c3 0x0000c0c3 12  13   .rodata ascii ThickerPaper
+238 0x0000c0d0 0x0000c0d0 9   10   .rodata ascii BondPaper
+239 0x0000c0da 0x0000c0da 14  15   .rodata ascii Transparencies
+240 0x0000c0e9 0x0000c0e9 9   10   .rodata ascii Envelopes
+241 0x0000c0f3 0x0000c0f3 9   10   .rodata ascii Env.Thick
+242 0x0000c0fd 0x0000c0fd 8   9    .rodata ascii Env.Thin
+243 0x0000c106 0x0000c106 8   9    .rodata ascii Recycled
+244 0x0000c10f 0x0000c10f 5   6    .rodata ascii PLAIN
+245 0x0000c115 0x0000c115 4   5    .rodata ascii THIN
+246 0x0000c11a 0x0000c11a 5   6    .rodata ascii THICK
+247 0x0000c120 0x0000c120 7   8    .rodata ascii THICKER
+248 0x0000c128 0x0000c128 4   5    .rodata ascii BOND
+249 0x0000c12d 0x0000c12d 5   6    .rodata ascii TRANS
+250 0x0000c137 0x0000c137 9   10   .rodata ascii ENV-THICK
+251 0x0000c141 0x0000c141 8   9    .rodata ascii ENV-THIN
+252 0x0000c14a 0x0000c14a 8   9    .rodata ascii RECYCLED
+253 0x0000c153 0x0000c153 14  15   .rodata ascii PrinterDefault
+254 0x0000c162 0x0000c162 7   8    .rodata ascii PRINTER
+255 0x0000c16a 0x0000c16a 4   5    .rodata ascii None
+256 0x0000c16f 0x0000c16f 7   8    .rodata ascii [%[^]]s
+257 0x0000c330 0x0000c330 31  32   .rodata ascii Error: %s :cannot open file !!\n
+258 0x0000c350 0x0000c350 27  28   .rodata ascii Error: cannot open file !!\n
+259 0x0000c36c 0x0000c36c 29  30   .rodata ascii Error: %s :invalid option !!\n
+260 0x0000c38a 0x0000c38a 25  26   .rodata ascii Error: invalid option !!\n
+261 0x0000c3a4 0x0000c3a4 28  29   .rodata ascii Error:exception handling !!\n
+262 0x0000c3c8 0x0000c3c8 10  11   .rodata ascii [XXXXXXXX]
+263 0x0000c3d4 0x0000c3d4 9   10   .rodata ascii [default]
+264 0x0000c3de 0x0000c3de 16  17   .rodata ascii Resolution={600}
+265 0x0000c3ef 0x0000c3ef 20  21   .rodata ascii Paper Source={Tray1}
+266 0x0000c404 0x0000c404 24  25   .rodata ascii Output Bin={StandardBin}
+267 0x0000c41d 0x0000c41d 12  13   .rodata ascii Duplex={OFF}
+268 0x0000c42a 0x0000c42a 18  19   .rodata ascii Duplex Type={Long}
+269 0x0000c440 0x0000c440 45  46   .rodata ascii Paper Type={(LANG_USA,LANG_CANADA)=Letter,A4}
+270 0x0000c46e 0x0000c46e 18  19   .rodata ascii Media={PlainPaper}
+271 0x0000c481 0x0000c481 10  11   .rodata ascii Copies={1}
+272 0x0000c48c 0x0000c48c 22  23   .rodata ascii Sleep={PrinterDefault}
+273 0x0000c4a3 0x0000c4a3 15  16   .rodata ascii Sleep Count={5}
+274 0x0000c4b3 0x0000c4b3 21  22   .rodata ascii Toner Save Mode={OFF}
+275 0x0000c4c9 0x0000c4c9 15  16   .rodata ascii [SelectionItem]
+276 0x0000c4e0 0x0000c4e0 49  50   .rodata ascii Resolution={300,600,1200,HQ1200A,HQ1200B,600x300}
+277 0x0000c518 0x0000c518 50  51   .rodata ascii Resolution2={300,600,1200,HQ1200A,HQ1200B,600x300}
+278 0x0000c550 0x0000c550 69  70   .rodata ascii Paper Source={Manual,Tray1,Tray2,Tray3,Tray4,Tray5,MpTray,AutoSelect}
+279 0x0000c598 0x0000c598 52  53   .rodata ascii Output Bin={StandardBin,Bin1,Bin2,Bin3,Bin4,Stacker}
+280 0x0000c5cd 0x0000c5cd 15  16   .rodata ascii Duplex={OFF,ON}
+281 0x0000c5dd 0x0000c5dd 24  25   .rodata ascii Duplex Type={Long,Short}
+282 0x0000c5f8 0x0000c5f8 247 248  .rodata ascii Paper Type={A4,Letter,Legal,Exective,A5,A6,B5,JISB5,B6,JISB6,C5,DL,Com-10,Monarch,PC4x6,Postcard,DHagaki,EnvYou4,EnvChou3,EnvChou4,FOLIO,A4L,3x5,195x270mm,184x260mm,197x273mm,CUSTOM1,CUSTOM2,CUSTOM3,CUSTOM4,CUSTOM5,CUSTOM6,CUSTOM7,CUSTOM8,CUSTOM9}
+283 0x0000c6f0 0x0000c6f0 116 117  .rodata ascii Media={PlainPaper,ThinPaper,ThickPaper,Thicker Paper,BondPaper,Transparencies,Envelopes,Env.Thick,Env.Thin,Recycled}
+284 0x0000c765 0x0000c765 16  17   .rodata ascii Copies={"1-999"}
+285 0x0000c776 0x0000c776 29  30   .rodata ascii Sleep={PrinterDefault,"1-99"}
+286 0x0000c794 0x0000c794 24  25   .rodata ascii Toner Save Mode={ON,OFF}
+287 0x0000e160 0x0020e160 32  33   .data   ascii 00000000000000000000000000000000
+288 0x0000e19c 0x0020e19c 5   7    .data   utf8  ߫#\eSk
+289 0x0000e1a4 0x0020e1a4 5   7    .data   utf8  ϗ{[Sk
+290 0x0000e1ac 0x0020e1ac 5   7    .data   utf8  ϗ{[Sk
+291 0x0000e1b4 0x0020e1b4 5   7    .data   utf8  ϗ{[Sk
+292 0x0000e1c2 0x0020e1c2 4   5    .data   ascii _/7o
+293 0x0000e1ca 0x0020e1ca 4   5    .data   ascii _/7o
+294 0x0000e1d2 0x0020e1d2 4   5    .data   ascii _/7o
+295 0x0000e1da 0x0020e1da 4   5    .data   ascii _/7o
+296 0x0000e220 0x0020e220 5   7    .data   utf8  ӛwWOg
+297 0x0000e228 0x0020e228 5   7    .data   utf8  ӛwWOg
+298 0x0000e230 0x0020e230 5   7    .data   utf8  ӛwWOg
+299 0x0000e238 0x0020e238 5   7    .data   utf8  ӛwWOg
+300 0x0000e246 0x0020e246 4   5    .data   ascii c3;s
+301 0x0000e24e 0x0020e24e 4   5    .data   ascii c3;s
+302 0x0000e256 0x0020e256 4   5    .data   ascii c3;s
+303 0x0000e25e 0x0020e25e 4   5    .data   ascii c3\vC
+304 0x0000e2a6 0x0020e2a6 4   5    .data   ascii }]Wo
+305 0x0000e2b6 0x0020e2b6 4   5    .data   ascii }]Wo
+306 0x0000e2bf 0x0020e2bf 6   8    .data   utf8  _Ӂa19q
+307 0x0000e2c8 0x0020e2c8 5   7    .data   utf8  Ճc3;s
+308 0x0000e2d0 0x0020e2d0 5   7    .data   utf8  Ӂa19q
+309 0x0000e2d8 0x0020e2d8 5   7    .data   utf8  Ճc3;s
+310 0x0000e322 0x0020e322 4   5    .data   ascii yYQi
+311 0x0000e32a 0x0020e32a 4   5    .data   ascii {[Sk
+312 0x0000e332 0x0020e332 4   5    .data   ascii yYQi
+313 0x0000e33a 0x0020e33a 4   5    .data   ascii {[Sk
+314 0x0000e344 0x0020e344 5   7    .data   utf8  υe5?w
+315 0x0000e34c 0x0020e34c 5   7    .data   utf8  чg7=u
+316 0x0000e354 0x0020e354 5   7    .data   utf8  υe5?w
+317 0x0000e35c 0x0020e35c 5   7    .data   utf8  чg7\rE
+318 0x0000e36e 0x0020e36e 4   5    .data   ascii /\a\rE
+319 0x0000e3a4 0x0020e3a4 4   7    .data   utf8  검`Vn
+320 0x0000e3ae 0x0020e3ae 4   5    .data   ascii ~^Xp
+321 0x0000e3b4 0x0020e3b4 4   7    .data   utf8  검`Vn
+322 0x0000e3be 0x0020e3be 7   9    .data   utf8  ~^քd4<t
+323 0x0000e3c8 0x0020e3c8 5   7    .data   utf8  Ԃb2:r
+324 0x0000e3d0 0x0020e3d0 5   7    .data   utf8  քd4<t
+325 0x0000e3d8 0x0020e3d8 5   7    .data   utf8  Ԃb2:r
+326 0x0000e422 0x0020e422 4   5    .data   ascii |\Tl
+327 0x0000e42a 0x0020e42a 4   5    .data   ascii zZRj
+328 0x0000e432 0x0020e432 4   5    .data   ascii |\Tl
+329 0x0000e43a 0x0020e43a 4   5    .data   ascii zZRj
+330 0x0000e444 0x0020e444 5   7    .data   utf8  ҈h8>v
+331 0x0000e44c 0x0020e44c 5   7    .data   utf8  Іf6@x
+332 0x0000e454 0x0020e454 5   7    .data   utf8  ҈h8>v
+333 0x0000e486 0x0020e486 4   5    .data   ascii @:/\
+334 0x0000e48e 0x0020e48e 4   5    .data   ascii A<+[
+335 0x0000e496 0x0020e496 4   5    .data   ascii @:/\
+336 0x0000e49e 0x0020e49e 4   5    .data   ascii A<_t
+337 0x0000e4c2 0x0020e4c2 4   5    .data   ascii jIOw
+338 0x0000e4ca 0x0020e4ca 4   5    .data   ascii lKPy
+339 0x0000e4d2 0x0020e4d2 4   5    .data   ascii jIOw
+340 0x0000e4da 0x0020e4da 4   5    .data   ascii lKPy
+341 0x0000e502 0x0020e502 4   5    .data   ascii =4!Y
+342 0x0000e50a 0x0020e50a 4   5    .data   ascii >8&Z
+343 0x0000e512 0x0020e512 4   5    .data   ascii =4!Y
+344 0x0000e51a 0x0020e51a 4   5    .data   ascii >8&Z
+345 0x0000e520 0x0020e520 5   7    .data   utf8  ן}c]q
+346 0x0000e530 0x0020e530 5   7    .data   utf8  ן}c]q
+347 0x0000e546 0x0020e546 4   5    .data   ascii mLS|
+348 0x0000e54e 0x0020e54e 4   5    .data   ascii oMQz
+349 0x0000e556 0x0020e556 4   5    .data   ascii mLS|
+350 0x0000e566 0x0020e566 4   5    .data   ascii F\a\eX
+351 0x0000e576 0x0020e576 4   5    .data   ascii F\a\eX
+352 0x0000e57e 0x0020e57e 4   5    .data   ascii H\v1\
+353 0x0000e586 0x0020e586 4   5    .data   ascii B<-[
+354 0x0000e58e 0x0020e58e 4   5    .data   ascii A;1\
+355 0x0000e596 0x0020e596 4   5    .data   ascii B<-[
+356 0x0000e59e 0x0020e59e 4   5    .data   ascii A;bv
+357 0x0000e5c2 0x0020e5c2 4   5    .data   ascii mLQy
+358 0x0000e5ca 0x0020e5ca 4   5    .data   ascii kJOx
+359 0x0000e5d2 0x0020e5d2 4   5    .data   ascii mLQy
+360 0x0000e5da 0x0020e5da 4   5    .data   ascii kJOx
+361 0x0000e602 0x0020e602 4   5    .data   ascii ?9(Z
+362 0x0000e60a 0x0020e60a 4   5    .data   ascii >7$Y
+363 0x0000e612 0x0020e612 4   5    .data   ascii ?9(Z
+364 0x0000e61a 0x0020e61a 4   5    .data   ascii >7$Y
+365 0x0000e628 0x0020e628 5   7    .data   utf8  ؠ~d^r
+366 0x0000e638 0x0020e638 5   7    .data   utf8  ؠ~d^r
+367 0x0000e646 0x0020e646 4   5    .data   ascii pNR{
+368 0x0000e64e 0x0020e64e 4   5    .data   ascii nMS|
+369 0x0000e656 0x0020e656 4   5    .data   ascii pNR{
+370 0x0000e8ff 0x0020e8ff 5   7    .data   utf8  iܖk+6
+371 0x0000e908 0x0020e908 4   6    .data   utf8  ޙn.9
+372 0x0000e910 0x0020e910 4   6    .data   utf8  ܖk+6
+373 0x0000e918 0x0020e918 4   6    .data   utf8  ޙn.9
+374 0x0000e920 0x0020e920 4   6    .data   utf8  ܖk+6
+375 0x0000e928 0x0020e928 4   6    .data   utf8  ޙn.9
+376 0x0000e930 0x0020e930 4   6    .data   utf8  ܖk+6
+377 0x0000e938 0x0020e938 4   6    .data   utf8  ޙn.9
+378 0x0000ea04 0x0020ea04 4   6    .data   utf8  ؛q1>
+379 0x0000ea0c 0x0020ea0c 4   6    .data   utf8  ڞs3;
+380 0x0000ea14 0x0020ea14 4   6    .data   utf8  ؛q1>
+381 0x0000ea1c 0x0020ea1c 4   6    .data   utf8  ڞs3;
+382 0x0000ea24 0x0020ea24 4   6    .data   utf8  ؛q1>
+383 0x0000ea2c 0x0020ea2c 4   6    .data   utf8  ڞs3;
+384 0x0000ea34 0x0020ea34 4   6    .data   utf8  ؛q1>
+385 0x0000eaff 0x0020eaff 5   7    .data   utf8  gߚo/:
+386 0x0000eb08 0x0020eb08 4   6    .data   utf8  ݗm-7
+387 0x0000eb10 0x0020eb10 4   6    .data   utf8  ߚo/:
+388 0x0000eb18 0x0020eb18 4   6    .data   utf8  ݗm-7
+389 0x0000eb20 0x0020eb20 4   6    .data   utf8  ߚo/:
+390 0x0000eb28 0x0020eb28 4   6    .data   utf8  ݗm-7
+391 0x0000eb30 0x0020eb30 4   6    .data   utf8  ߚo/:
+392 0x0000eb38 0x0020eb38 4   6    .data   utf8  ݗm-7
+393 0x0000ec04 0x0020ec04 4   6    .data   utf8  ۟u5=
+394 0x0000ec0c 0x0020ec0c 4   6    .data   utf8  ٝr2?
+395 0x0000ec14 0x0020ec14 4   6    .data   utf8  ۟u5=
+396 0x0000ec1c 0x0020ec1c 4   6    .data   utf8  ٝr2?
+397 0x0000ec24 0x0020ec24 4   6    .data   utf8  ۟u5=
+398 0x0000ec2c 0x0020ec2c 4   6    .data   utf8  ٝr2?
+399 0x0000ec34 0x0020ec34 4   6    .data   utf8  ۟u5=
+400 0x0000ecc2 0x0020ecc2 4   5    .data   ascii YSCK
+401 0x0000ecca 0x0020ecca 4   5    .data   ascii [QAI
+402 0x0000ecd2 0x0020ecd2 4   5    .data   ascii YSCK
+403 0x0000ecda 0x0020ecda 4   5    .data   ascii [QAI
+404 0x0000ed26 0x0020ed26 4   5    .data   ascii WDN]
+405 0x0000ed2e 0x0020ed2e 4   5    .data   ascii UFL_
+406 0x0000ed36 0x0020ed36 4   5    .data   ascii WDN]
+407 0x0000edc6 0x0020edc6 4   5    .data   ascii [PBJ
+408 0x0000edce 0x0020edce 4   5    .data   ascii YR@H
+409 0x0000edd6 0x0020edd6 4   5    .data   ascii [PBJ
+410 0x0000ee22 0x0020ee22 4   5    .data   ascii TGO\
+411 0x0000ee2a 0x0020ee2a 4   5    .data   ascii WEM^
+412 0x0000ee32 0x0020ee32 4   5    .data   ascii TGO\
+413 0x0000ee3a 0x0020ee3a 4   5    .data   ascii WEM^
+414 0x0000eec2 0x0020eec2 4   5    .data   ascii YSCK
+415 0x0000eeca 0x0020eeca 4   5    .data   ascii [QAI
+416 0x0000eed2 0x0020eed2 4   5    .data   ascii YSCK
+417 0x0000eeda 0x0020eeda 4   5    .data   ascii [QAI
+418 0x0000ef26 0x0020ef26 4   5    .data   ascii WDN]
+419 0x0000ef2e 0x0020ef2e 4   5    .data   ascii UFL_
+420 0x0000ef36 0x0020ef36 4   5    .data   ascii WDN]
+421 0x0000efc6 0x0020efc6 4   5    .data   ascii [PBJ
+422 0x0000efce 0x0020efce 4   5    .data   ascii YR@H
+423 0x0000efd6 0x0020efd6 4   5    .data   ascii [PBJ
+424 0x0000f022 0x0020f022 4   5    .data   ascii TGO\
+425 0x0000f02a 0x0020f02a 4   5    .data   ascii WEM^
+426 0x0000f032 0x0020f032 4   5    .data   ascii TGO\
+427 0x0000f03a 0x0020f03a 4   5    .data   ascii WEM^
+428 0x0000f080 0x0020f080 36  37   .data   ascii \n\t\tIPW@/\n\n\tKRXB1\n\t\tIPW@/\n\n\tKRXB1\a\a\bm
+429 0x0000f0a8 0x0020f0a8 4   5    .data   ascii \a\b\bo
+430 0x0000f0b0 0x0020f0b0 4   5    .data   ascii \a\a\bm
+431 0x0000f0b8 0x0020f0b8 4   5    .data   ascii \a\b\bo
+432 0x0000f160 0x0020f160 7   8    .data   ascii DZTM"\v\f
+433 0x0000f168 0x0020f168 7   8    .data   ascii F[UO$\f\r
+434 0x0000f170 0x0020f170 7   8    .data   ascii DZTM"\v\f
+435 0x0000f178 0x0020f178 7   8    .data   ascii F[UO$\f\r
+436 0x0000f180 0x0020f180 32  33   .data   ascii SYC2\n\t\tJQXA0\v\n\tLSYC2\n\t\tJQXA0\v\n\tL
+437 0x0000f1a2 0x0020f1a2 6   7    .data   ascii ` \a\b\b\n
+438 0x0000f1ac 0x0020f1ac 4   5    .data   ascii \a\b\tp
+439 0x0000f1b2 0x0020f1b2 6   7    .data   ascii ` \a\b\b\n
+440 0x0000f1bc 0x0020f1bc 4   6    .data   utf8  \a\b\tp
+441 0x0000f264 0x0020f264 7   8    .data   ascii EZUN#\v\r
+442 0x0000f26c 0x0020f26c 6   7    .data   ascii G\VO%\f
+443 0x0000f274 0x0020f274 7   8    .data   ascii EZUN#\v\r
+444 0x0000f27c 0x0020f27c 40  41   .data   ascii G\VO\n\t\tIPW@/\n\n\tKRXB1\n\t\tIPW@/\n\n\tKRXB1\a\a\bm
+445 0x0000f2a8 0x0020f2a8 4   5    .data   ascii \a\b\bo
+446 0x0000f2b0 0x0020f2b0 4   5    .data   ascii \a\a\bm
+447 0x0000f2b8 0x0020f2b8 4   5    .data   ascii \a\b\bo
+448 0x0000f360 0x0020f360 7   8    .data   ascii DZTM"\v\f
+449 0x0000f368 0x0020f368 7   8    .data   ascii F[UO$\f\r
+450 0x0000f370 0x0020f370 7   8    .data   ascii DZTM"\v\f
+451 0x0000f378 0x0020f378 7   8    .data   ascii F[UO$\f\r
+452 0x0000f380 0x0020f380 32  33   .data   ascii SYC2\n\t\tJQXA0\v\n\tLSYC2\n\t\tJQXA0\v\n\tL
+453 0x0000f3a2 0x0020f3a2 6   7    .data   ascii ` \a\b\b\n
+454 0x0000f3ac 0x0020f3ac 4   5    .data   ascii \a\b\tp
+455 0x0000f3b2 0x0020f3b2 6   7    .data   ascii ` \a\b\b\n
+456 0x0000f3bc 0x0020f3bc 4   6    .data   utf8  \a\b\tp
+457 0x0000f464 0x0020f464 7   8    .data   ascii EZUN#\v\r
+458 0x0000f46c 0x0020f46c 6   7    .data   ascii G\VO%\f
+459 0x0000f474 0x0020f474 7   8    .data   ascii EZUN#\v\r
+460 0x0000f47c 0x0020f47c 4   5    .data   ascii G\VO
+461 0x0000f520 0x0020f520 7   8    .data   ascii MONARCH
+462 0x0000f540 0x0020f540 6   7    .data   ascii HAGAKI
+463 0x0000f560 0x0020f560 5   6    .data   ascii COM10
+464 0x0000f5a0 0x0020f5a0 7   8    .data   ascii EnvYou4
+465 0x0000f600 0x0020f600 5   6    .data   ascii JISB6
+466 0x0000f680 0x0020f680 5   6    .data   ascii JISB5
+467 0x0000f6a0 0x0020f6a0 9   10   .data   ascii EXECUTIVE
+468 0x0000f6e0 0x0020f6e0 6   7    .data   ascii LETTER
+469 0x0000f700 0x0020f700 5   6    .data   ascii FOLIO
+470 0x0000f720 0x0020f720 5   6    .data   ascii LEGAL
